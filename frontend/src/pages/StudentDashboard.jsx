@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import API from "../services/api";
 
 import Sidebar from "../components/Sidebar";
-import Topbar from "../components/Topbar";
+
 import DashboardCards from "../components/DashboardCards";
 
 import "../styles/StudentDashboard.css";
@@ -66,7 +66,7 @@ function StudentDashboard() {
       <Sidebar />
 
       <div className="main-content">
-        <Topbar />
+        
 
         <DashboardCards
           total={stats.total}

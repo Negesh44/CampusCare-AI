@@ -38,6 +38,14 @@ public class Complaint {
 
     private String assignedTo;
 
+    private Long assignedFacultyId;
+
+    private String assignedFacultyName;
+
+    private String assignedFacultyEmail;
+
+    private String assignedLocation;
+
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
@@ -103,7 +111,6 @@ public class Complaint {
     public void setFloor(Integer floor) {
         this.floor = floor;
     }
-
     public String getRoomNumber() {
         return roomNumber;
     }
@@ -142,6 +149,38 @@ public class Complaint {
 
     public void setAssignedTo(String assignedTo) {
         this.assignedTo = assignedTo;
+    }
+
+    public Long getAssignedFacultyId() {
+        return assignedFacultyId;
+    }
+
+    public void setAssignedFacultyId(Long assignedFacultyId) {
+        this.assignedFacultyId = assignedFacultyId;
+    }
+
+    public String getAssignedFacultyName() {
+        return assignedFacultyName;
+    }
+
+    public void setAssignedFacultyName(String assignedFacultyName) {
+        this.assignedFacultyName = assignedFacultyName;
+    }
+
+    public String getAssignedFacultyEmail() {
+        return assignedFacultyEmail;
+    }
+
+    public void setAssignedFacultyEmail(String assignedFacultyEmail) {
+        this.assignedFacultyEmail = assignedFacultyEmail;
+    }
+
+    public String getAssignedLocation() {
+        return assignedLocation;
+    }
+
+    public void setAssignedLocation(String assignedLocation) {
+        this.assignedLocation = assignedLocation;
     }
 
     public LocalDateTime getCreatedAt() {

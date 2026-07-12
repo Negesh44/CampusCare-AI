@@ -7,19 +7,20 @@ import {
   TextField,
   MenuItem,
   Button,
+  Divider,
 } from "@mui/material";
 
 import API from "../services/api";
 
 import Sidebar from "../components/Sidebar";
-import Topbar from "../components/Topbar";
+
 
 function RaiseComplaint() {
   const [complaint, setComplaint] = useState({
     title: "",
     category: "",
     blockName: "",
-    floor: "",
+    floor: 0,
     roomNumber: "",
     priority: "",
     description: "",
@@ -32,7 +33,30 @@ function RaiseComplaint() {
     "Internet / WiFi",
     "Projector / Smart Board",
     "Classroom Infrastructure",
+    "Air Conditioner",
+    "Fan Issue",
+    "Lighting",
+    "Plumbing",
   ];
+
+  const blocks = [
+    "Main Block",
+    "A Block",
+    "B Block",
+    "C Block",
+    "D Block",
+    "Library",
+    "Lab Complex",
+  ];
+
+  const floors = [
+  { label: "Ground Floor", value: 0 },
+  { label: "1st Floor", value: 1 },
+  { label: "2nd Floor", value: 2 },
+  { label: "3rd Floor", value: 3 },
+  { label: "4th Floor", value: 4 },
+  { label: "5th Floor", value: 5 },
+];
 
   const submitComplaint = async () => {
     try {
@@ -55,7 +79,7 @@ function RaiseComplaint() {
         title: "",
         category: "",
         blockName: "",
-        floor: "",
+        floor: 0,
         roomNumber: "",
         priority: "",
         description: "",
@@ -72,51 +96,69 @@ function RaiseComplaint() {
 
   return (
     <div className="dashboard-container">
+
       <Sidebar />
 
       <div className="main-content">
-        <Topbar />
+
+       
 
         <div className="page-content">
 
           <Typography
-            variant="h4"
-            fontWeight="bold"
-            mb={1}
-          >
-            Submit Service Request
-          </Typography>
+  sx={{
+    fontSize: "42px",
+    fontWeight: 700,
+    color: "#0f172a",
+    mb: 1,
+  }}
+>
+  Raise Complaint
+</Typography>
 
-          <Typography
-            color="text.secondary"
-            mb={3}
-          >
-            Submit maintenance and
-            infrastructure related
-            requests for review and
-            resolution.
-          </Typography>
+<Typography
+  sx={{
+    fontSize: "18px",
+    color: "#64748b",
+    mb: 4,
+  }}
+>
+  Report maintenance and infrastructure issues for quick resolution.
+</Typography>
 
           <Paper
-            elevation={0}
-            sx={{
-              p: 3,
-              borderRadius: 4,
-              height: "calc(100vh - 220px)",
-            }}
-          >
+  elevation={0}
+  sx={{
+    p: 5,
+    borderRadius: "24px",
+    background: "#ffffff",
+    border: "1px solid #e2e8f0",
+    boxShadow:
+      "0 12px 40px rgba(15,23,42,0.08)",
+  }}
+>
+
             <Box
               sx={{
                 display: "grid",
                 gridTemplateColumns:
-                  "1fr 1fr",
-                gap: 2,
+                  {
+                    xs: "1fr",
+                    md: "1fr 1fr",
+                  },
+                gap: 3,
               }}
             >
 
               <TextField
                 label="Request Title"
                 fullWidth
+                sx={{
+  "& .MuiOutlinedInput-root": {
+    borderRadius: "14px",
+    background: "#f8fafc",
+  },
+}}
                 value={complaint.title}
                 onChange={(e) =>
                   setComplaint({
@@ -131,7 +173,15 @@ function RaiseComplaint() {
                 select
                 label="Category"
                 fullWidth
-                value={complaint.category}
+                sx={{
+  "& .MuiOutlinedInput-root": {
+    borderRadius: "14px",
+    background: "#f8fafc",
+  },
+}}
+                value={
+                  complaint.category
+                }
                 onChange={(e) =>
                   setComplaint({
                     ...complaint,
@@ -153,8 +203,15 @@ function RaiseComplaint() {
               </TextField>
 
               <TextField
+                select
                 label="Block"
                 fullWidth
+                sx={{
+  "& .MuiOutlinedInput-root": {
+    borderRadius: "14px",
+    background: "#f8fafc",
+  },
+}}
                 value={
                   complaint.blockName
                 }
@@ -165,24 +222,56 @@ function RaiseComplaint() {
                       e.target.value,
                   })
                 }
-              />
+              >
+                {blocks.map(
+                  (block) => (
+                    <MenuItem
+                      key={block}
+                      value={block}
+                    >
+                      {block}
+                    </MenuItem>
+                  )
+                )}
+              </TextField>
 
               <TextField
+                select
                 label="Floor"
                 fullWidth
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: "14px",
+                    background: "#f8fafc",
+                  },
+                }}
                 value={complaint.floor}
                 onChange={(e) =>
                   setComplaint({
                     ...complaint,
-                    floor:
-                      e.target.value,
+                    floor: Number(e.target.value),
                   })
                 }
-              />
+              >
+                {floors.map((floor) => (
+                  <MenuItem
+                    key={floor.value}
+                    value={floor.value}
+                  >
+                    {floor.label}
+                  </MenuItem>
+                ))}
+              </TextField>
 
               <TextField
                 label="Room Number"
                 fullWidth
+                sx={{
+  "& .MuiOutlinedInput-root": {
+    borderRadius: "14px",
+    background: "#f8fafc",
+  },
+}}
                 value={
                   complaint.roomNumber
                 }
@@ -199,6 +288,12 @@ function RaiseComplaint() {
                 select
                 label="Priority"
                 fullWidth
+                sx={{
+  "& .MuiOutlinedInput-root": {
+    borderRadius: "14px",
+    background: "#f8fafc",
+  },
+}}
                 value={
                   complaint.priority
                 }
@@ -211,26 +306,32 @@ function RaiseComplaint() {
                 }
               >
                 <MenuItem value="LOW">
-                  Low
+                  🟢 Low
                 </MenuItem>
 
                 <MenuItem value="MEDIUM">
-                  Medium
+                  🟡 Medium
                 </MenuItem>
 
                 <MenuItem value="HIGH">
-                  High
+                  🔴 High
                 </MenuItem>
               </TextField>
 
             </Box>
 
             <TextField
-              label="Description"
-              multiline
-              rows={4}
-              fullWidth
-              sx={{ mt: 3 }}
+  label="Describe the Issue"
+  multiline
+  rows={6}
+  fullWidth
+  sx={{
+    mt: 4,
+    "& .MuiOutlinedInput-root": {
+      borderRadius: "14px",
+      background: "#f8fafc",
+    },
+  }}
               value={
                 complaint.description
               }
@@ -243,24 +344,32 @@ function RaiseComplaint() {
               }
             />
 
+            
+
             <Button
               variant="contained"
               size="large"
+              fullWidth
               sx={{
                 mt: 3,
+                py: 1.5,
                 borderRadius: 3,
+                fontSize: "16px",
+                fontWeight: 600,
               }}
               onClick={
                 submitComplaint
               }
             >
-              Submit Request
+              Submit Complaint
             </Button>
 
           </Paper>
 
         </div>
+
       </div>
+
     </div>
   );
 }

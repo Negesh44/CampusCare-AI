@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.campuscare.backend.model.Complaint;
 import com.campuscare.backend.model.ComplaintHistory;
+import com.campuscare.backend.model.User;
 import com.campuscare.backend.repository.ComplaintHistoryRepository;
 import com.campuscare.backend.repository.ComplaintRepository;
+import com.campuscare.backend.repository.UserRepository;
 import com.campuscare.backend.service.ComplaintService;
 
 @RestController
@@ -27,15 +29,18 @@ public class ComplaintController {
     private final ComplaintRepository repository;
     private final ComplaintService complaintService;
     private final ComplaintHistoryRepository historyRepository;
+    private final UserRepository userRepository;
 
     public ComplaintController(
             ComplaintRepository repository,
             ComplaintService complaintService,
-            ComplaintHistoryRepository historyRepository) {
+            ComplaintHistoryRepository historyRepository,
+            UserRepository userRepository) {
 
         this.repository = repository;
         this.complaintService = complaintService;
         this.historyRepository = historyRepository;
+        this.userRepository = userRepository;
     }
 
     @GetMapping
@@ -43,11 +48,53 @@ public class ComplaintController {
         return repository.findAll();
     }
 
+    @GetMapping("/faculty")
+    public List<Complaint> getFacultyComplaints(
+            @RequestParam String email) {
+
+        return repository
+                .findByAssignedFacultyEmail(email);
+    }
+
     @PostMapping
     public Complaint createComplaint(
             @RequestBody Complaint complaint) {
 
-        return complaintService.createComplaint(complaint);
+        String location =
+        complaint.getBlockName()
+        + " - "
+        + complaint.getFloor();
+
+        List<User> facultyList =
+                userRepository.findAll();
+
+        for (User user : facultyList) {
+
+            if ("FACULTY".equals(user.getRole())
+                    && location.equalsIgnoreCase(
+                    user.getAssignedLocation())) {
+
+                complaint.setAssignedFacultyId(
+                        user.getId());
+
+                complaint.setAssignedFacultyName(
+                        user.getName());
+
+                complaint.setAssignedFacultyEmail(
+                        user.getEmail());
+
+                complaint.setAssignedLocation(
+                        user.getAssignedLocation());
+
+                complaint.setAssignedTo(
+                        user.getName());
+
+                break;
+            }
+        }
+
+        return complaintService
+                .createComplaint(complaint);
     }
 
     @PutMapping("/{id}/status")
@@ -73,6 +120,7 @@ public class ComplaintController {
         history.setComplaintId(id);
         history.setOldStatus(oldStatus);
         history.setNewStatus(status);
+
         history.setUpdatedBy(
                 complaint.getAssignedTo());
 

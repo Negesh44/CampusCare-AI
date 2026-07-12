@@ -26,6 +26,8 @@ public class User {
 
     private String department;
 
+    private String assignedLocation;
+
     public User() {
     }
 
@@ -71,5 +73,13 @@ public class User {
 
     public void setDepartment(String department) {
         this.department = department;
+    }
+
+    public String getAssignedLocation() {
+        return assignedLocation;
+    }
+
+    public void setAssignedLocation(String assignedLocation) {
+        this.assignedLocation = assignedLocation;
     }
 }

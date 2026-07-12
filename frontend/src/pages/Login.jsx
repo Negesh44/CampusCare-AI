@@ -13,32 +13,54 @@ function Login() {
 
   const login = async () => {
     try {
-      const response = await API.post(
-        "/api/auth/login",
-        {
-          email,
-          password,
-        }
-      );
+
+      const response =
+        await API.post(
+          "/api/auth/login",
+          {
+            email,
+            password,
+          }
+        );
 
       const user = response.data;
+      console.log(user);
+
+localStorage.setItem(
+  "user",
+  JSON.stringify(user)
+);  
+
+      localStorage.setItem(
+        "user",
+        JSON.stringify(user)
+      );
 
       if (user.role === "STUDENT") {
         navigate("/student");
-      } else if (user.role === "FACULTY") {
+      }
+      else if (
+        user.role === "FACULTY"
+      ) {
         navigate("/faculty");
-      } else if (user.role === "PRINCIPAL") {
+      }
+      else if (
+        user.role === "PRINCIPAL"
+      ) {
         navigate("/principal");
       }
+
     } catch (error) {
-      alert("Invalid Login Credentials");
+
+      alert(
+        "Invalid Login Credentials"
+      );
+
     }
   };
 
   return (
     <div className="login-page">
-      
-      {/* LEFT PANEL */}
 
       <div className="left-panel">
         <motion.div
@@ -70,51 +92,22 @@ function Login() {
           <p className="platform-description">
             CampusCare AI is designed to simplify the way
             students report and track campus-related issues.
-            From classroom facilities to infrastructure
-            concerns, students can easily raise complaints,
-            monitor progress, and stay informed throughout
-            the resolution process.
           </p>
-
-          <div className="feature-list">
-            <p>
-              📚 Report classroom, laboratory and
-              academic facility issues
-            </p>
-
-            <p>
-              🏢 Raise infrastructure and maintenance
-              requests across the campus
-            </p>
-
-            <p>
-              🔔 Receive real-time complaint status
-              updates
-            </p>
-
-            <p>
-              ⚡ Faster issue resolution through
-              automated complaint routing
-            </p>
-
-            <p>
-              🤝 Transparent communication between
-              students and administration
-            </p>
-          </div>
         </motion.div>
       </div>
 
-      {/* RIGHT PANEL */}
-
       <div className="right-panel">
+
         <motion.div
           className="login-card"
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h2>Welcome Back 👋</h2>
+
+          <h2>
+            Welcome Back 👋
+          </h2>
 
           <p className="login-subtitle">
             Sign in using your college account
@@ -154,6 +147,7 @@ function Login() {
           </p>
 
         </motion.div>
+
       </div>
 
     </div>

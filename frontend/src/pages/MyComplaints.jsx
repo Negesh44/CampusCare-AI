@@ -83,7 +83,7 @@ function MyComplaints() {
       <Sidebar />
 
       <div className="main-content">
-        <Topbar />
+        
 
         <div
           style={{

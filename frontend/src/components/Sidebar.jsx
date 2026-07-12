@@ -1,4 +1,8 @@
-import { Link, useLocation } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 
 import {
   LayoutDashboard,
@@ -10,6 +14,7 @@ import {
 
 function Sidebar() {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const menuStyle = (path) => ({
     display: "flex",
@@ -30,6 +35,17 @@ function Sidebar() {
         : "transparent",
   });
 
+  const handleLogout = () => {
+    const confirmLogout = window.confirm(
+      "Are you sure you want to logout?"
+    );
+
+    if (confirmLogout) {
+      localStorage.clear();
+      navigate("/");
+    }
+  };
+
   return (
     <div
       style={{
@@ -46,6 +62,7 @@ function Sidebar() {
       }}
     >
       <div>
+
         <h1
           style={{
             color: "white",
@@ -71,6 +88,7 @@ function Sidebar() {
             gap: "12px",
           }}
         >
+
           <Link
             to="/student"
             style={menuStyle("/student")}
@@ -106,10 +124,12 @@ function Sidebar() {
             <User size={20} />
             Profile
           </Link>
+
         </div>
       </div>
 
       <button
+        onClick={handleLogout}
         style={{
           border: "none",
           background: "#ef4444",
@@ -122,16 +142,17 @@ function Sidebar() {
           fontSize: "16px",
 
           cursor: "pointer",
+
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "10px",
         }}
       >
-        <LogOut
-          size={18}
-          style={{
-            marginRight: "10px",
-          }}
-        />
+        <LogOut size={18} />
         Logout
       </button>
+
     </div>
   );
 }
