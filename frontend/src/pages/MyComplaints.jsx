@@ -13,10 +13,13 @@ function MyComplaints() {
 
   const loadComplaints = async () => {
     try {
-      const response = await API.get(
-        "/api/complaints"
-      );
+     const user = JSON.parse(
+  localStorage.getItem("user")
+);
 
+const response = await API.get(
+  `/api/complaints/student/${user.id}`
+);
       setComplaints(response.data);
     } catch (error) {
       console.error(error);
