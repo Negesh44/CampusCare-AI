@@ -55,6 +55,12 @@ public class ComplaintController {
         return repository
                 .findByAssignedFacultyEmail(email);
     }
+    @GetMapping("/student/{studentId}")
+public List<Complaint> getStudentComplaints(
+        @PathVariable Long studentId) {
+
+    return repository.findByStudentId(studentId);
+}
 
     @PostMapping
     public Complaint createComplaint(

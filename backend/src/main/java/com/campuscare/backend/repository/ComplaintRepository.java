@@ -17,6 +17,8 @@ public interface ComplaintRepository
     List<Complaint> findByAssignedLocation(
             String assignedLocation);
 
+            List<Complaint> findByStudentId(
+        Long studentId);
     List<Complaint> findByStatus(
             String status);
 }  

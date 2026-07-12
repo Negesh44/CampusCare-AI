@@ -60,11 +60,15 @@ function RaiseComplaint() {
 
   const submitComplaint = async () => {
     try {
-      const payload = {
-        ...complaint,
-        status: "OPEN",
-        studentId: 1,
-      };
+      const user = JSON.parse(
+  localStorage.getItem("user")
+);
+
+const payload = {
+  ...complaint,
+  status: "OPEN",
+  studentId: user.id,
+};
 
       await API.post(
         "/api/complaints",

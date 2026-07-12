@@ -7,7 +7,9 @@ import Sidebar from "../components/Sidebar";
 import DashboardCards from "../components/DashboardCards";
 
 import "../styles/StudentDashboard.css";
-
+const user = JSON.parse(
+  localStorage.getItem("user")
+);
 function StudentDashboard() {
   const [complaints, setComplaints] = useState([]);
 
@@ -23,11 +25,17 @@ function StudentDashboard() {
   }, []);
 
   const loadComplaints = async () => {
-    try {
-      const response =
-        await API.get("/api/complaints");
+  try {
 
-      const data = response.data;
+    const user = JSON.parse(
+      localStorage.getItem("user")
+    );
+
+    const response = await API.get(
+      `/api/complaints/student/${user.id}`
+    );
+
+    const data = response.data;
 
       setComplaints(data);
 

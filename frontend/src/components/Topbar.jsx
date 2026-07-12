@@ -40,7 +40,7 @@ function Topbar() {
           <div className="profile-info">
 
             <h4>
-              Negesh Bala
+             {user?.name}
             </h4>
 
             <p>
