@@ -48,42 +48,36 @@ function Sidebar() {
     }
   };
 
- return (
-  
-
+return (
   <div
-  style={{
-   width: "300px",
+    className="sidebar"
+    style={{
+      background: "#03153F",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
+      padding: "24px",
+    }}
+  >
+    <div>
 
-   height: "100vh",
+      <h1
+        style={{
+          color: "white",
+          marginBottom: "5px",
+        }}
+      >
+        CampusCare AI
+      </h1>
 
-    background: "#03153F",
-
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-
-    padding: "24px",
-  }}
->
-      <div>
-
-       <h1
-  style={{
-    color: "white",
-    marginBottom: "5px",
-  }}
->
-  CampusCare AI
-</h1>
-        <p
-          style={{
-            color: "#cbd5e1",
-            marginBottom: "40px",
-          }}
-        >
-          Easwari Engineering College
-        </p>
+      <p
+        style={{
+          color: "#cbd5e1",
+          marginBottom: "40px",
+        }}
+      >
+        Easwari Engineering College
+      </p>
 
         <div
           style={{
