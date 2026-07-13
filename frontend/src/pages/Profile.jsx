@@ -2,6 +2,10 @@ import Sidebar from "../components/Sidebar";
 
 
 function Profile() {
+  const user = JSON.parse(
+    localStorage.getItem("user")
+  );
+
   return (
     <div className="dashboard-container">
       <Sidebar />
@@ -65,7 +69,11 @@ function Profile() {
                   fontWeight: "700",
                 }}
               >
-                NB
+               {user?.name
+  ?.split(" ")
+  .map(n => n[0])
+  .join("")
+  .substring(0,2)}
               </div>
 
               <div>
@@ -75,7 +83,7 @@ function Profile() {
                     fontSize: "32px",
                   }}
                 >
-                  Negesh Bala
+                  {user?.name}
                 </h2>
 
                 <p
@@ -129,13 +137,13 @@ function Profile() {
               <p>
                 <strong>Year:</strong>{" "}
                 III Year
-              </p>
+              </p>  
 
               <p>
                 <strong>
                   College Email:
                 </strong>{" "}
-                negesh@eec.srmrmp.edu.in
+                {user?.email}
               </p>
 
               <p>
