@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import API from "../services/api";
 
 import Sidebar from "../components/Sidebar";
-import Topbar from "../components/Topbar";
 
 function MyComplaints() {
   const [complaints, setComplaints] = useState([]);
@@ -13,13 +12,14 @@ function MyComplaints() {
 
   const loadComplaints = async () => {
     try {
-     const user = JSON.parse(
-  localStorage.getItem("user")
-);
+      const user = JSON.parse(
+        localStorage.getItem("user")
+      );
 
-const response = await API.get(
-  `/api/complaints/student/${user.id}`
-);
+      const response = await API.get(
+        `/api/complaints/student/${user.id}`
+      );
+
       setComplaints(response.data);
     } catch (error) {
       console.error(error);
@@ -40,7 +40,7 @@ const response = await API.get(
               fontWeight: "600",
             }}
           >
-            Awaiting Review
+            🟡 Open
           </span>
         );
 
@@ -56,7 +56,7 @@ const response = await API.get(
               fontWeight: "600",
             }}
           >
-            In Progress
+            🔵 In Progress
           </span>
         );
 
@@ -72,7 +72,7 @@ const response = await API.get(
               fontWeight: "600",
             }}
           >
-            Resolved
+            🟢 Resolved
           </span>
         );
 
@@ -86,8 +86,6 @@ const response = await API.get(
       <Sidebar />
 
       <div className="main-content">
-        
-
         <div
           style={{
             padding: "20px",
@@ -112,8 +110,7 @@ const response = await API.get(
               marginBottom: "20px",
             }}
           >
-            View and track all submitted
-            service requests.
+            View and track all submitted service requests.
           </p>
 
           <div
@@ -123,6 +120,7 @@ const response = await API.get(
               padding: "20px",
               flex: 1,
               overflowY: "auto",
+              overflowX: "auto",
               boxShadow:
                 "0 4px 12px rgba(0,0,0,0.05)",
             }}
@@ -131,6 +129,7 @@ const response = await API.get(
               style={{
                 width: "100%",
                 borderCollapse: "collapse",
+                border: "1px solid #e5e7eb",
               }}
             >
               <thead
@@ -141,16 +140,12 @@ const response = await API.get(
                   zIndex: 1,
                 }}
               >
-                <tr
-                  style={{
-                    borderBottom:
-                      "1px solid #e5e7eb",
-                  }}
-                >
+                <tr>
                   <th
                     style={{
                       textAlign: "left",
                       padding: "15px",
+                      border: "1px solid #e5e7eb",
                     }}
                   >
                     Title
@@ -160,6 +155,7 @@ const response = await API.get(
                     style={{
                       textAlign: "left",
                       padding: "15px",
+                      border: "1px solid #e5e7eb",
                     }}
                   >
                     Category
@@ -169,6 +165,7 @@ const response = await API.get(
                     style={{
                       textAlign: "left",
                       padding: "15px",
+                      border: "1px solid #e5e7eb",
                     }}
                   >
                     Block
@@ -178,6 +175,7 @@ const response = await API.get(
                     style={{
                       textAlign: "left",
                       padding: "15px",
+                      border: "1px solid #e5e7eb",
                     }}
                   >
                     Priority
@@ -187,25 +185,41 @@ const response = await API.get(
                     style={{
                       textAlign: "left",
                       padding: "15px",
+                      border: "1px solid #e5e7eb",
                     }}
                   >
                     Status
+                  </th>
+
+                  <th
+                    style={{
+                      textAlign: "left",
+                      padding: "15px",
+                      border: "1px solid #e5e7eb",
+                    }}
+                  >
+                    Assigned Faculty
+                  </th>
+
+                  <th
+                    style={{
+                      textAlign: "left",
+                      padding: "15px",
+                      border: "1px solid #e5e7eb",
+                    }}
+                  >
+                    Date & Time
                   </th>
                 </tr>
               </thead>
 
               <tbody>
                 {complaints.map((c) => (
-                  <tr
-                    key={c.id}
-                    style={{
-                      borderBottom:
-                        "1px solid #f3f4f6",
-                    }}
-                  >
+                  <tr key={c.id}>
                     <td
                       style={{
                         padding: "15px",
+                        border: "1px solid #e5e7eb",
                       }}
                     >
                       {c.title}
@@ -214,6 +228,7 @@ const response = await API.get(
                     <td
                       style={{
                         padding: "15px",
+                        border: "1px solid #e5e7eb",
                       }}
                     >
                       {c.category}
@@ -222,6 +237,7 @@ const response = await API.get(
                     <td
                       style={{
                         padding: "15px",
+                        border: "1px solid #e5e7eb",
                       }}
                     >
                       {c.blockName}
@@ -230,6 +246,7 @@ const response = await API.get(
                     <td
                       style={{
                         padding: "15px",
+                        border: "1px solid #e5e7eb",
                       }}
                     >
                       {c.priority}
@@ -238,11 +255,32 @@ const response = await API.get(
                     <td
                       style={{
                         padding: "15px",
+                        border: "1px solid #e5e7eb",
                       }}
                     >
-                      {getStatusBadge(
-                        c.status
-                      )}
+                      {getStatusBadge(c.status)}
+                    </td>
+
+                    <td
+                      style={{
+                        padding: "15px",
+                        border: "1px solid #e5e7eb",
+                      }}
+                    >
+                      {c.assignedFacultyName || "Not Assigned"}
+                    </td>
+
+                    <td
+                      style={{
+                        padding: "15px",
+                        border: "1px solid #e5e7eb",
+                      }}
+                    >
+                      {c.createdAt
+                        ? new Date(
+                            c.createdAt
+                          ).toLocaleString()
+                        : "-"}
                     </td>
                   </tr>
                 ))}
