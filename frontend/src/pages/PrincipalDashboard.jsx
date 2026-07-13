@@ -21,8 +21,14 @@ import {
 
 function PrincipalDashboard() {
 
-  const [complaints, setComplaints] =
-    useState([]);
+ const [complaints, setComplaints] =
+  useState([]);
+
+const [search, setSearch] =
+  useState("");
+
+const [statusFilter, setStatusFilter] =
+  useState("ALL");
 
   useEffect(() => {
     loadComplaints();
@@ -212,9 +218,65 @@ function PrincipalDashboard() {
         </div>
         <div className="recent-card">
 
-          <h2>
-            Recent Complaints
-          </h2>
+  <h2>
+    Recent Complaints
+  </h2>
+
+  <div
+    style={{
+      display: "flex",
+      gap: "15px",
+      marginBottom: "20px",
+      flexWrap: "wrap",
+    }}
+  >
+
+    <input
+      type="text"
+      placeholder="Search complaints..."
+      value={search}
+      onChange={(e) =>
+        setSearch(e.target.value)
+      }
+      style={{
+        padding: "10px",
+        border: "1px solid #ddd",
+        borderRadius: "8px",
+        flex: 1,
+        minWidth: "250px",
+      }}
+    />
+
+    <select
+      value={statusFilter}
+      onChange={(e) =>
+        setStatusFilter(e.target.value)
+      }
+      style={{
+        padding: "10px",
+        border: "1px solid #ddd",
+        borderRadius: "8px",
+      }}
+    >
+      <option value="ALL">
+        All Status
+      </option>
+
+      <option value="OPEN">
+        Open
+      </option>
+
+      <option value="IN_PROGRESS">
+        In Progress
+      </option>
+
+      <option value="RESOLVED">
+        Resolved
+      </option>
+
+    </select>
+
+  </div>
 
           <table>
 
@@ -233,9 +295,41 @@ function PrincipalDashboard() {
 
             <tbody>
 
-              {complaints
-                .slice(0, 10)
-                .map((c) => (
+             {complaints
+  .filter((c) => {
+
+    const matchesSearch =
+      c.title
+        ?.toLowerCase()
+        .includes(
+          search.toLowerCase()
+        ) ||
+
+      c.category
+        ?.toLowerCase()
+        .includes(
+          search.toLowerCase()
+        ) ||
+
+      c.assignedFacultyName
+        ?.toLowerCase()
+        .includes(
+          search.toLowerCase()
+        );
+
+    const matchesStatus =
+      statusFilter === "ALL"
+        ? true
+        : c.status === statusFilter;
+
+    return (
+      matchesSearch &&
+      matchesStatus
+    );
+
+  })
+  .slice(0, 10)
+  .map((c) => (
 
                <tr key={c.id}>
 
