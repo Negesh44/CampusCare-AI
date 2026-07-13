@@ -1,6 +1,6 @@
 .faculty-container{
   display:flex;
-  height:100vh;
+  min-height:100vh;
   background:#f5f7fb;
 }
 
@@ -221,4 +221,43 @@ tbody tr:hover{
 .completed-text{
   color:#22c55e;
   font-weight:700;
+}
+@media (max-width: 900px){
+
+  .faculty-container{
+    flex-direction:column;
+  }
+
+  .faculty-sidebar{
+    width:100%;
+    height:auto;
+    padding:15px;
+  }
+
+  .faculty-main{
+    width:100%;
+    padding:15px;
+  }
+
+  .faculty-profile-card{
+    display:none;
+  }
+
+  .faculty-logout{
+    width:auto;
+    padding:10px 20px;
+  }
+
+}
+@media (max-width: 900px){
+
+  .faculty-container{
+    flex-direction: column;
+  }
+
+  .faculty-main{
+    width:100% !important;
+    margin-left:0 !important;
+  }
+
 }

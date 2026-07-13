@@ -29,7 +29,10 @@ const [search, setSearch] =
 
 const [statusFilter, setStatusFilter] =
   useState("ALL");
+const [page, setPage] =
+  useState(1);
 
+const itemsPerPage = 10;
   useEffect(() => {
     loadComplaints();
   }, []);
@@ -171,7 +174,46 @@ const [statusFilter, setStatusFilter] =
     }
 
   });
+const filteredComplaints =
+  complaints.filter((c) => {
 
+    const matchesSearch =
+      c.title
+        ?.toLowerCase()
+        .includes(
+          search.toLowerCase()
+        ) ||
+
+      c.category
+        ?.toLowerCase()
+        .includes(
+          search.toLowerCase()
+        ) ||
+
+      c.assignedFacultyName
+        ?.toLowerCase()
+        .includes(
+          search.toLowerCase()
+        );
+
+    const matchesStatus =
+      statusFilter === "ALL"
+        ? true
+        : c.status === statusFilter;
+
+    return (
+      matchesSearch &&
+      matchesStatus
+    );
+  });
+
+const paginatedComplaints =
+  filteredComplaints.slice(
+    (page - 1) *
+      itemsPerPage,
+    page *
+      itemsPerPage
+  );
   return (
 
     <div className="principal-container">
@@ -289,13 +331,14 @@ const [statusFilter, setStatusFilter] =
   <th>Location</th>
   <th>Priority</th>
   <th>Status</th>
+  <th>Raised On</th>
 </tr>
 
             </thead>
 
             <tbody>
 
-             {complaints
+             {paginatedComplaints
   .filter((c) => {
 
     const matchesSearch =
@@ -331,7 +374,7 @@ const [statusFilter, setStatusFilter] =
   .slice(0, 10)
   .map((c) => (
 
-               <tr key={c.id}>
+              <tr key={c.id}>
 
   <td>{c.title}</td>
 
@@ -345,6 +388,16 @@ const [statusFilter, setStatusFilter] =
 
   <td>{c.status}</td>
 
+  <td>
+    {c.createdAt
+      ? new Date(c.createdAt)
+  .toLocaleString("en-IN", {
+    dateStyle: "medium",
+    timeStyle: "short",
+  })
+      : "-"}
+  </td>
+
 </tr>
                   
 
@@ -353,6 +406,45 @@ const [statusFilter, setStatusFilter] =
             </tbody>
 
           </table>
+          <div
+  style={{
+    display: "flex",
+    justifyContent:
+      "center",
+    gap: "10px",
+    marginTop: "20px",
+  }}
+>
+
+  <button
+    onClick={() =>
+      setPage(page - 1)
+    }
+    disabled={page === 1}
+  >
+    Previous
+  </button>
+
+  <span>
+    Page {page}
+  </span>
+
+  <button
+    onClick={() =>
+      setPage(page + 1)
+    }
+    disabled={
+      page >=
+      Math.ceil(
+        filteredComplaints.length /
+        itemsPerPage
+      )
+    }
+  >
+    Next
+  </button>
+
+</div>
 
         </div>
         <div className="recent-card">

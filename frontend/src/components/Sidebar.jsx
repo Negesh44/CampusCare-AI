@@ -47,20 +47,27 @@ function Sidebar() {
   };
 
   return (
-    <div
-      style={{
-        width: "300px",
-        height: "100vh",
+   <div
+  style={{
+    width:
+      window.innerWidth < 900
+        ? "100%"
+        : "300px",
 
-        background: "#03153F",
+    height:
+      window.innerWidth < 900
+        ? "auto"
+        : "100vh",
 
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
+    background: "#03153F",
 
-        padding: "24px",
-      }}
-    >
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+
+    padding: "24px",
+  }}
+>
       <div>
 
         <h1

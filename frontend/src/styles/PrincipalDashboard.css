@@ -287,3 +287,59 @@ tbody tr:hover{
   }
 
 }
+@media (max-width: 768px) {
+
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .principal-cards {
+    grid-template-columns: 1fr !important;
+  }
+
+  .chart-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+}@media (max-width: 900px) {
+
+  .principal-container{
+    display:block;
+  }
+
+ .principal-sidebar{
+  width:100%;
+  padding:10px;
+}
+
+.principal-profile-card{
+  display:none;
+}
+
+.principal-logout{
+  width:auto;
+  padding:10px 20px;
+}
+  .principal-main{
+    width:100% !important;
+    margin:0 !important;
+    padding:15px !important;
+  }
+
+  .principal-cards{
+    grid-template-columns:1fr !important;
+  }
+
+  .chart-grid{
+    grid-template-columns:1fr !important;
+  }
+
+  table{
+    display:block;
+    overflow-x:auto;
+    white-space:nowrap;
+  }
+
+}

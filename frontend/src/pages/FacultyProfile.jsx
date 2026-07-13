@@ -1,10 +1,13 @@
 import FacultySidebar from "../components/FacultySidebar";
 
 function FacultyProfile() {
+  const isMobile = window.innerWidth < 900;
+
   return (
     <div
       style={{
         display: "flex",
+        flexDirection: isMobile ? "column" : "row",
         minHeight: "100vh",
         background: "#f5f7fb",
       }}
@@ -14,12 +17,13 @@ function FacultyProfile() {
       <div
         style={{
           flex: 1,
-          padding: "40px",
+          padding: isMobile ? "15px" : "40px",
         }}
       >
         <h1
           style={{
             marginBottom: "10px",
+            fontSize: isMobile ? "28px" : "36px",
           }}
         >
           Faculty Profile
@@ -38,7 +42,7 @@ function FacultyProfile() {
           style={{
             background: "white",
             borderRadius: "20px",
-            padding: "30px",
+            padding: isMobile ? "20px" : "30px",
             boxShadow:
               "0 4px 12px rgba(0,0,0,0.05)",
           }}
@@ -46,9 +50,11 @@ function FacultyProfile() {
           <div
             style={{
               display: "flex",
+              flexDirection: isMobile ? "column" : "row",
               alignItems: "center",
               gap: "20px",
               marginBottom: "30px",
+              textAlign: isMobile ? "center" : "left",
             }}
           >
             <div
@@ -70,10 +76,7 @@ function FacultyProfile() {
 
             <div>
               <h2>Faculty C</h2>
-
-              <p>
-                Electrical Department
-              </p>
+              <p>Electrical Department</p>
             </div>
           </div>
 
@@ -84,7 +87,7 @@ function FacultyProfile() {
               marginTop: "25px",
               display: "grid",
               gap: "15px",
-              fontSize: "18px",
+              fontSize: isMobile ? "16px" : "18px",
             }}
           >
             <div>
@@ -92,26 +95,21 @@ function FacultyProfile() {
             </div>
 
             <div>
-              <strong>Email:</strong>
-              {" "}
+              <strong>Email:</strong>{" "}
               facultyc@eec.srmrmp.edu.in
             </div>
 
             <div>
-              <strong>Department:</strong>
-              {" "}
+              <strong>Department:</strong>{" "}
               Electrical
             </div>
 
             <div>
-              <strong>Role:</strong>
-              {" "}
-              Faculty
+              <strong>Role:</strong> Faculty
             </div>
 
             <div>
-              <strong>Employee ID:</strong>
-              {" "}
+              <strong>Employee ID:</strong>{" "}
               FAC001
             </div>
           </div>
