@@ -79,7 +79,7 @@ function PrincipalSidebar() {
           </div>
 
           <h3>
-            Principal
+           Dr. Deiva Sundari
           </h3>
 
           <p>

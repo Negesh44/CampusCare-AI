@@ -23,6 +23,7 @@ function PrincipalDashboard() {
 
  const [complaints, setComplaints] =
   useState([]);
+  
 
 const [search, setSearch] =
   useState("");
@@ -200,8 +201,8 @@ const filteredComplaints =
       statusFilter === "ALL"
         ? true
         : c.status === statusFilter;
-
-    return (
+        
+     return (
       matchesSearch &&
       matchesStatus
     );
@@ -277,9 +278,10 @@ const paginatedComplaints =
       type="text"
       placeholder="Search complaints..."
       value={search}
-      onChange={(e) =>
-        setSearch(e.target.value)
-      }
+      onChange={(e) => {
+  setSearch(e.target.value);
+  setPage(1);
+}}
       style={{
         padding: "10px",
         border: "1px solid #ddd",
@@ -291,9 +293,10 @@ const paginatedComplaints =
 
     <select
       value={statusFilter}
-      onChange={(e) =>
-        setStatusFilter(e.target.value)
-      }
+      onChange={(e) => {
+  setStatusFilter(e.target.value);
+  setPage(1);
+}}    
       style={{
         padding: "10px",
         border: "1px solid #ddd",
@@ -338,41 +341,7 @@ const paginatedComplaints =
 
             <tbody>
 
-             {paginatedComplaints
-  .filter((c) => {
-
-    const matchesSearch =
-      c.title
-        ?.toLowerCase()
-        .includes(
-          search.toLowerCase()
-        ) ||
-
-      c.category
-        ?.toLowerCase()
-        .includes(
-          search.toLowerCase()
-        ) ||
-
-      c.assignedFacultyName
-        ?.toLowerCase()
-        .includes(
-          search.toLowerCase()
-        );
-
-    const matchesStatus =
-      statusFilter === "ALL"
-        ? true
-        : c.status === statusFilter;
-
-    return (
-      matchesSearch &&
-      matchesStatus
-    );
-
-  })
-  .slice(0, 10)
-  .map((c) => (
+             {paginatedComplaints.map((c) => (
 
               <tr key={c.id}>
 

@@ -1,5 +1,4 @@
 package com.campuscare.backend.model;
-
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
@@ -53,16 +52,34 @@ public class Complaint {
     public Complaint() {
     }
 
-    @PrePersist
-    protected void onCreate() {
-        createdAt = LocalDateTime.now();
-        updatedAt = LocalDateTime.now();
-    }
+   @PrePersist
+protected void onCreate() {
 
-    @PreUpdate
-    protected void onUpdate() {
-        updatedAt = LocalDateTime.now();
-    }
+    createdAt =
+        LocalDateTime.now(
+            java.time.ZoneId.of(
+                "Asia/Kolkata"
+            )
+        );
+
+    updatedAt =
+        LocalDateTime.now(
+            java.time.ZoneId.of(
+                "Asia/Kolkata"
+            )
+        );
+}
+
+@PreUpdate
+protected void onUpdate() {
+
+    updatedAt =
+        LocalDateTime.now(
+            java.time.ZoneId.of(
+                "Asia/Kolkata"
+            )
+        );
+}
 
     public Long getId() {
         return id;

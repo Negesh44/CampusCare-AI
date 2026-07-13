@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import {
   Box,
@@ -16,6 +17,7 @@ import Sidebar from "../components/Sidebar";
 
 
 function RaiseComplaint() {
+  const navigate = useNavigate();
   const [complaint, setComplaint] = useState({
     title: "",
     category: "",
@@ -39,24 +41,25 @@ function RaiseComplaint() {
     "Plumbing",
   ];
 
-  const blocks = [
-    "Main Block",
-    "A Block",
-    "B Block",
-    "C Block",
-    "D Block",
-    "Library",
-    "Lab Complex",
-  ];
+  const blockFloors = {
+  "Main Block": [0,1,2,3,4,5],
 
-  const floors = [
-  { label: "Ground Floor", value: 0 },
-  { label: "1st Floor", value: 1 },
-  { label: "2nd Floor", value: 2 },
-  { label: "3rd Floor", value: 3 },
-  { label: "4th Floor", value: 4 },
-  { label: "5th Floor", value: 5 },
-];
+  "Civil Block": [1,2,3,4,5,6,7],
+
+  "Academic Block": [4,5,6],
+
+  "Block III": [1,2,5,6],
+
+  "Mechanical Block": [0,1,2,3,4,5,6],
+
+  "Electronics Block": [3,4,5,6,7],
+
+  "TRP Auditorium / Hi-Tech Hall I & II": [0],
+};
+
+const blocks = Object.keys(blockFloors);
+const availableFloors =
+  blockFloors[complaint.blockName] || [];
 
   const submitComplaint = async () => {
     try {
@@ -75,9 +78,9 @@ const payload = {
         payload
       );
 
-      alert(
-        "Complaint submitted successfully!"
-      );
+      alert("Complaint submitted successfully!");
+
+navigate("/my-complaints");
 
       setComplaint({
         title: "",
@@ -220,12 +223,12 @@ const payload = {
                   complaint.blockName
                 }
                 onChange={(e) =>
-                  setComplaint({
-                    ...complaint,
-                    blockName:
-                      e.target.value,
-                  })
-                }
+  setComplaint({
+    ...complaint,
+    blockName: e.target.value,
+    floor: 0,
+  })
+}
               >
                 {blocks.map(
                   (block) => (
@@ -257,36 +260,35 @@ const payload = {
                   })
                 }
               >
-                {floors.map((floor) => (
-                  <MenuItem
-                    key={floor.value}
-                    value={floor.value}
-                  >
-                    {floor.label}
-                  </MenuItem>
-                ))}
+               {availableFloors.map((floor) => (
+  <MenuItem
+    key={floor}
+    value={floor}
+  >
+    {floor === 0
+      ? "Ground Floor"
+      : `${floor} Floor`}
+  </MenuItem>
+))}
               </TextField>
 
               <TextField
-                label="Room Number"
-                fullWidth
-                sx={{
-  "& .MuiOutlinedInput-root": {
-    borderRadius: "14px",
-    background: "#f8fafc",
-  },
-}}
-                value={
-                  complaint.roomNumber
-                }
-                onChange={(e) =>
-                  setComplaint({
-                    ...complaint,
-                    roomNumber:
-                      e.target.value,
-                  })
-                }
-              />
+  label="Room Number"
+  fullWidth
+  sx={{
+    "& .MuiOutlinedInput-root": {
+      borderRadius: "14px",
+      background: "#f8fafc",
+    },
+  }}
+  value={complaint.roomNumber}
+  onChange={(e) =>
+    setComplaint({
+      ...complaint,
+      roomNumber: e.target.value,
+    })
+  }
+/>
 
               <TextField
                 select

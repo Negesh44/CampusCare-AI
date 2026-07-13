@@ -4,6 +4,8 @@ import {
   useNavigate,
 } from "react-router-dom";
 
+
+
 import {
   LayoutDashboard,
   ClipboardPlus,
@@ -46,18 +48,14 @@ function Sidebar() {
     }
   };
 
-  return (
-   <div
-  style={{
-    width:
-      window.innerWidth < 900
-        ? "100%"
-        : "300px",
+ return (
+  
 
-    height:
-      window.innerWidth < 900
-        ? "auto"
-        : "100vh",
+  <div
+  style={{
+   width: "300px",
+
+   height: "100vh",
 
     background: "#03153F",
 
@@ -70,15 +68,14 @@ function Sidebar() {
 >
       <div>
 
-        <h1
-          style={{
-            color: "white",
-            marginBottom: "5px",
-          }}
-        >
-          CampusCare AI
-        </h1>
-
+       <h1
+  style={{
+    color: "white",
+    marginBottom: "5px",
+  }}
+>
+  CampusCare AI
+</h1>
         <p
           style={{
             color: "#cbd5e1",
@@ -161,7 +158,7 @@ function Sidebar() {
       </button>
 
     </div>
-  );
+);
 }
 
 export default Sidebar;

@@ -344,3 +344,20 @@ body,
 .main-content {
   overflow-y: visible;
 }
+html,
+body,
+#root {
+  height: auto;
+  min-height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.dashboard-container {
+  min-height: 100vh;
+  overflow-y: auto;
+}
+
+.main-content {
+  overflow-y: visible;
+}

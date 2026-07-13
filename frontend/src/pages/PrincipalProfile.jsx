@@ -57,7 +57,7 @@ function PrincipalProfile() {
                   margin: 0,
                 }}
               >
-                Principal
+                Dr. Deiva Sundari
               </h2>
 
               <p
@@ -85,7 +85,7 @@ function PrincipalProfile() {
 
             <div>
               <strong>Name:</strong>
-              {" "}Principal
+              {" "}Dr. Deiva Sundari
             </div>
 
             <div>
@@ -100,7 +100,7 @@ function PrincipalProfile() {
 
             <div>
               <strong>Role:</strong>
-              {" "}Principal
+              {" "}Dr. Deiva Sundari
             </div>
 
             <div>
