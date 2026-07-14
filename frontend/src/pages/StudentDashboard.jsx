@@ -142,9 +142,7 @@ function StudentDashboard() {
   🌱 Help maintain a green campus by avoiding damage to plants and college property.
 </div>
 
-<div className="notice">
-  🤝 Treat faculty, staff, and fellow students with respect and professionalism.
-</div>
+
           </div>
 
         </div>

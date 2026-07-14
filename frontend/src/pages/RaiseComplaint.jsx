@@ -29,17 +29,15 @@ function RaiseComplaint() {
   });
 
   const categories = [
-    "Electrical",
-    "Water Leakage",
-    "Furniture",
-    "Internet / WiFi",
-    "Projector / Smart Board",
-    "Classroom Infrastructure",
-    "Air Conditioner",
-    "Fan Issue",
-    "Lighting",
-    "Plumbing",
-  ];
+  "Cleanliness",
+  "Electricity",
+  "Furniture",
+  "Internet / WiFi",
+  "Projector / Smart Board",
+  "Fan Issue",
+  "Drinking Water",
+  "Plumbing"
+];
 
   const blockFloors = {
   "Main Block": [0,1,2,3,4,5],
