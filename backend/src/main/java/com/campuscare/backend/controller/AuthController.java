@@ -44,7 +44,7 @@ public class AuthController {
 
         return user;
     }
-    @PostMapping("/google-login")
+   @PostMapping("/google-login")
 public User googleLogin(
         @RequestBody Map<String, String> request) {
 
@@ -60,20 +60,20 @@ public User googleLogin(
             .findByEmail(email)
             .orElse(null);
 
-    if (user == null) {
-
-       user = new User();
-
-user.setName(name);
-user.setEmail(email);
-
-user.setRole("STUDENT");
-user.setDepartment("ECE");
-user.setPassword("GOOGLE_LOGIN");
-
-user = userRepository.save(user);
+    // Faculty / Principal already exists
+    if (user != null) {
+        return user;
     }
 
-    return user;
+    // New Student
+    user = new User();
+
+    user.setName(name);
+    user.setEmail(email);
+    user.setRole("STUDENT");
+    user.setDepartment("ECE");
+    user.setPassword("GOOGLE_LOGIN");
+
+    return userRepository.save(user);
 }
 }
