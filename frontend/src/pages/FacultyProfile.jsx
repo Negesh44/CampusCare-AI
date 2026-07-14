@@ -3,6 +3,19 @@ import FacultySidebar from "../components/FacultySidebar";
 function FacultyProfile() {
   const isMobile = window.innerWidth < 900;
 
+  const user = JSON.parse(
+    localStorage.getItem("user")
+  );
+
+  const initials = user?.name
+    ?.replace("Dr.", "")
+    .trim()
+    .split(" ")
+    .map((word) => word[0])
+    .join("")
+    .substring(0, 2)
+    .toUpperCase();
+
   return (
     <div
       style={{
@@ -71,12 +84,12 @@ function FacultyProfile() {
                 fontWeight: "700",
               }}
             >
-              FC
+              {initials}
             </div>
 
             <div>
-              <h2>Faculty C</h2>
-              <p>Electrical Department</p>
+              <h2>{user?.name}</h2>
+              <p>{user?.department}</p>
             </div>
           </div>
 
@@ -91,26 +104,23 @@ function FacultyProfile() {
             }}
           >
             <div>
-              <strong>Name:</strong> Faculty C
+              <strong>Name:</strong> {user?.name}
             </div>
 
             <div>
-              <strong>Email:</strong>{" "}
-              facultyc@eec.srmrmp.edu.in
+              <strong>Email:</strong> {user?.email}
             </div>
 
             <div>
-              <strong>Department:</strong>{" "}
-              Electrical
+              <strong>Department:</strong> {user?.department}
             </div>
 
             <div>
-              <strong>Role:</strong> Faculty
+              <strong>Role:</strong> {user?.role}
             </div>
 
             <div>
-              <strong>Employee ID:</strong>{" "}
-              FAC001
+              <strong>Employee ID:</strong> FAC{user?.id}
             </div>
           </div>
         </div>
