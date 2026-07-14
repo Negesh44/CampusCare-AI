@@ -222,13 +222,11 @@
 
 .recent-card{
   background:white;
-
-  padding:20px;
-
-  border-radius:18px;
-
-  box-shadow:
-    0 4px 12px rgba(0,0,0,.05);
+  padding:25px;
+  border-radius:20px;
+  border:2px solid #dbeafe;
+  box-shadow:0 8px 20px rgba(0,0,0,.06);
+  margin-bottom:25px;
 }
 
 .recent-card h2{
@@ -342,4 +340,144 @@ tbody tr:hover{
     white-space:nowrap;
   }
 
+}
+/* PRIORITY */
+
+.priority-high{
+  background:#fee2e2;
+  color:#dc2626;
+  padding:6px 12px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.priority-medium{
+  background:#fef3c7;
+  color:#d97706;
+  padding:6px 12px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.priority-low{
+  background:#dcfce7;
+  color:#16a34a;
+  padding:6px 12px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:700;
+}
+
+/* STATUS */
+
+.status-open{
+  background:#fef3c7;
+  color:#b45309;
+  padding:6px 12px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.status-working{
+  background:#dbeafe;
+  color:#2563eb;
+  padding:6px 12px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.status-resolved{
+  background:#dcfce7;
+  color:#16a34a;
+  padding:6px 12px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:700;
+}
+/* PROFESSIONAL TABLE HEADER */
+
+thead{
+  background:#f8fafc;
+}
+
+th{
+  font-weight:700;
+  color:#334155;
+  text-transform:uppercase;
+  font-size:13px;
+  letter-spacing:0.5px;
+}
+
+/* ALTERNATE ROW COLORS */
+
+tbody tr:nth-child(even){
+  background:#fafafa;
+}
+
+tbody tr:hover{
+  background:#f1f5f9;
+}
+
+/* TABLE LOOK */
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  overflow:hidden;
+}
+
+td{
+  vertical-align:middle;
+}
+.table-container{
+  overflow-x:auto;
+  border-radius:16px;
+}
+
+thead{
+  background:#f8fafc;
+}
+
+th{
+  color:#475569;
+  font-size:13px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+}
+
+tbody tr:nth-child(even){
+  background:#fafafa;
+}
+
+.category-badge{
+  background:#e0f2fe;
+  color:#0369a1;
+  padding:6px 12px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:600;
+}
+.faculty-performance-card{
+  background:white;
+  padding:25px;
+  border-radius:20px;
+  border:2px solid #e9d5ff;
+  box-shadow:0 8px 20px rgba(0,0,0,.06);
+  margin-bottom:25px;
+}
+.recent-card,
+.analytics-card{
+  transition:0.3s;
+}
+
+.recent-card:hover,
+.analytics-card:hover{
+  transform:translateY(-2px);
+  box-shadow:
+    0 12px 24px rgba(0,0,0,.08);
 }

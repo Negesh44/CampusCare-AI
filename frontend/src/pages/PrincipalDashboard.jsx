@@ -259,11 +259,34 @@ const paginatedComplaints =
           </div>
 
         </div>
-        <div className="recent-card">
+        <div
+  className="recent-card"
+  style={{
+    border: "2px solid #dbeafe",
+  }}
+>
+  <div
+  style={{
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: "20px",
+  }}
+>
+  <h2>Complaint Management</h2>
 
-  <h2>
-    Recent Complaints
-  </h2>
+  <span
+    style={{
+      background: "#dbeafe",
+      color: "#1d4ed8",
+      padding: "8px 14px",
+      borderRadius: "20px",
+      fontWeight: "600",
+    }}
+  >
+    Total: {filteredComplaints.length}
+  </span>
+</div>
 
   <div
     style={{
@@ -323,11 +346,12 @@ const paginatedComplaints =
 
   </div>
 
-          <table>
+         <div className="table-container">
+<table>
 
-            <thead>
-
-              <tr>
+  <thead>
+<tr>
+  <th>#</th>
   <th>Title</th>
   <th>Category</th>
   <th>Faculty</th>
@@ -341,21 +365,52 @@ const paginatedComplaints =
 
             <tbody>
 
-             {paginatedComplaints.map((c) => (
+            {paginatedComplaints.map((c, index) => (
 
               <tr key={c.id}>
-
+<td>{(page - 1) * itemsPerPage + index + 1}</td>
   <td>{c.title}</td>
 
-  <td>{c.category}</td>
+  <td>
+  <span className="category-badge">
+    {c.category}
+  </span>
+</td>
 
-  <td>{c.assignedFacultyName}</td>
+  <td>
+  {c.assignedFacultyName || "Not Assigned"}
+</td>
 
-  <td>{c.assignedLocation}</td>
+  <td>
+  {c.assignedLocation || "-"}
+</td>
 
-  <td>{c.priority}</td>
-
-  <td>{c.status}</td>
+  <td>
+  <span
+    className={
+      c.priority === "HIGH"
+        ? "priority-high"
+        : c.priority === "MEDIUM"
+        ? "priority-medium"
+        : "priority-low"
+    }
+  >
+    {c.priority}
+  </span>
+</td>
+  <td>
+  <span
+    className={
+      c.status === "OPEN"
+        ? "status-open"
+        : c.status === "IN_PROGRESS"
+        ? "status-working"
+        : "status-resolved"
+    }
+  >
+    {c.status}
+  </span>
+</td>
 
   <td>
     {c.createdAt
@@ -374,8 +429,10 @@ const paginatedComplaints =
 
             </tbody>
 
-          </table>
-          <div
+         </table>
+</div>
+
+<div
   style={{
     display: "flex",
     justifyContent:
@@ -416,11 +473,16 @@ const paginatedComplaints =
 </div>
 
         </div>
-        <div className="recent-card">
+        <div
+  className="recent-card"
+  style={{
+    border: "2px solid #e9d5ff",
+  }}
+>
 
-          <h2>
-            Faculty Performance
-          </h2>
+  <h2>
+    👨‍🏫 Faculty Performance
+  </h2>
 
           <table>
 
@@ -470,9 +532,16 @@ const paginatedComplaints =
           </table>
 
         </div>
-<div className="analytics-card">
+<div
+  className="analytics-card"
+  style={{
+    border: "2px solid #fde68a",
+  }}
+>
 
-  <h2>Campus Insights</h2>
+  <h2>
+    📊 Campus Insights
+  </h2>
 
   <div className="analytics-item">
     <span>Total Complaints</span>
@@ -497,11 +566,16 @@ const paginatedComplaints =
 </div>
         <div className="chart-grid">
 
-          <div className="analytics-card">
+          <div
+  className="analytics-card"
+  style={{
+    border: "2px solid #bfdbfe",
+  }}
+>
 
-            <h2>
-              Complaint Status
-            </h2>
+  <h2>
+    🥧 Complaint Status
+  </h2>
 
             <ResponsiveContainer
               width="100%"
@@ -543,11 +617,16 @@ const paginatedComplaints =
 
           </div>
 
-          <div className="analytics-card">
+         <div
+  className="analytics-card"
+  style={{
+    border: "2px solid #bbf7d0",
+  }}
+>
 
-            <h2>
-              Category Analysis
-            </h2>
+  <h2>
+    📈 Category Analysis
+  </h2>
 
             <ResponsiveContainer
               width="100%"
