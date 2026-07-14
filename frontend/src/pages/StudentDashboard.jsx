@@ -123,29 +123,28 @@ function StudentDashboard() {
           <div className="recent-card">
 
             <h2>
-              Campus Notices
-            </h2>
+  Campus Notices
+</h2>
 
-            <div className="notice">
-              📚 Academic Calendar
-              2026-27 Published
-            </div>
+<div className="notice">
+  🧹 Keep classrooms, corridors, and common areas clean at all times.
+</div>
 
-            <div className="notice">
-              🔧 Main Block
-              Maintenance This Weekend
-            </div>
+<div className="notice">
+  🚯 Use designated dustbins and avoid littering anywhere on campus.
+</div>
 
-            <div className="notice">
-              ⏰ Library Timings
-              Extended Till 8 PM
-            </div>
+<div className="notice">
+  🔇 Maintain silence in academic blocks, library, and study areas.
+</div>
 
-            <div className="notice">
-              📝 Mid Semester Exams
-              Begin Next Week
-            </div>
+<div className="notice">
+  🌱 Help maintain a green campus by avoiding damage to plants and college property.
+</div>
 
+<div className="notice">
+  🤝 Treat faculty, staff, and fellow students with respect and professionalism.
+</div>
           </div>
 
         </div>
