@@ -2,7 +2,6 @@ package com.campuscare.backend.controller;
 
 import java.util.Map;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,10 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.campuscare.backend.model.User;
 import com.campuscare.backend.repository.UserRepository;
-
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin("*")
+
 public class AuthController {
 
     private final UserRepository userRepository;
@@ -46,4 +44,36 @@ public class AuthController {
 
         return user;
     }
+    @PostMapping("/google-login")
+public User googleLogin(
+        @RequestBody Map<String, String> request) {
+
+    String email = request.get("email");
+    String name = request.get("name");
+
+    if (!email.endsWith("@eec.srmrmp.edu.in")) {
+        throw new RuntimeException(
+                "Only college email accounts are allowed");
+    }
+
+    User user = userRepository
+            .findByEmail(email)
+            .orElse(null);
+
+    if (user == null) {
+
+       user = new User();
+
+user.setName(name);
+user.setEmail(email);
+
+user.setRole("STUDENT");
+user.setDepartment("ECE");
+user.setPassword("GOOGLE_LOGIN");
+
+user = userRepository.save(user);
+    }
+
+    return user;
+}
 }
