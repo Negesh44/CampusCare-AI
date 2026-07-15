@@ -5,9 +5,9 @@ import ManagerSidebar from "../components/ManagerSidebar";
 function ManagerDashboard() {
   const [complaints, setComplaints] = useState([]);
 
-  useEffect(() => {
-    loadComplaints();
-  }, []);
+ useEffect(() => {
+  loadComplaints();
+}, []);
 
   const loadComplaints = async () => {
     try {
@@ -20,7 +20,41 @@ function ManagerDashboard() {
       console.error(error);
     }
   };
+  const updateStatus = async (
+  complaintId,
+  newStatus
+) => {
 
+  try {
+
+    await API.put(
+      `/api/complaints/${complaintId}/status?status=${newStatus}`
+    );
+
+    loadComplaints();
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert(
+      "Failed to update status"
+    );
+  }
+};
+const total = complaints.length;
+
+const open = complaints.filter(
+  (c) => c.status === "OPEN"
+).length;
+
+const progress = complaints.filter(
+  (c) => c.status === "IN_PROGRESS"
+).length;
+
+const resolved = complaints.filter(
+  (c) => c.status === "RESOLVED"
+).length;
   return (
     <div
       style={{
@@ -55,7 +89,35 @@ function ManagerDashboard() {
         >
           Monitor all complaints and faculty assignments.
         </p>
+<div
+  style={{
+    display: "grid",
+    gridTemplateColumns:
+      "repeat(4,1fr)",
+    gap: "20px",
+    marginBottom: "25px",
+  }}
+>
+  <div className="manager-card">
+    <h3>Total Complaints</h3>
+    <h2>{total}</h2>
+  </div>
 
+  <div className="manager-card">
+    <h3>Open</h3>
+    <h2>{open}</h2>
+  </div>
+
+  <div className="manager-card">
+    <h3>In Progress</h3>
+    <h2>{progress}</h2>
+  </div>
+
+  <div className="manager-card">
+    <h3>Resolved</h3>
+    <h2>{resolved}</h2>
+  </div>
+</div>
         <div
           style={{
             background: "white",
@@ -219,39 +281,38 @@ function ManagerDashboard() {
                   </td>
 
                   <td
-                    style={{
-                      padding: "14px",
-                    }}
-                  >
-                    <span
-                      style={{
-                        padding:
-                          "6px 12px",
-                        borderRadius:
-                          "20px",
-                        fontSize: "12px",
-                        fontWeight: "700",
-                        background:
-                          c.status ===
-                          "OPEN"
-                            ? "#fef3c7"
-                            : c.status ===
-                              "IN_PROGRESS"
-                            ? "#dbeafe"
-                            : "#dcfce7",
-                        color:
-                          c.status ===
-                          "OPEN"
-                            ? "#b45309"
-                            : c.status ===
-                              "IN_PROGRESS"
-                            ? "#2563eb"
-                            : "#16a34a",
-                      }}
-                    >
-                      {c.status}
-                    </span>
-                  </td>
+  style={{
+    padding: "14px",
+  }}
+>
+  <select
+    value={c.status}
+    onChange={(e) =>
+      updateStatus(
+        c.id,
+        e.target.value
+      )
+    }
+    style={{
+      padding: "8px",
+      borderRadius: "8px",
+      border: "1px solid #ddd",
+      cursor: "pointer",
+    }}
+  >
+    <option value="OPEN">
+      OPEN
+    </option>
+
+    <option value="IN_PROGRESS">
+      IN_PROGRESS
+    </option>
+
+    <option value="RESOLVED">
+      RESOLVED
+    </option>
+  </select>
+</td>
                 </tr>
               ))}
             </tbody>

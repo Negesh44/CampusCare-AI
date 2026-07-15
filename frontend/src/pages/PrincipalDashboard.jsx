@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import "../styles/ManagerDashboard.css";
 import API from "../services/api";
 
 import PrincipalSidebar from "../components/PrincipalSidebar";
