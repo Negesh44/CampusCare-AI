@@ -79,24 +79,22 @@ const totalPages =
   );
   return (
     <div
-      style={{
-        display: "flex",
-flexDirection:
-  isMobile ? "column" : "row",
-        minHeight: "100vh",
-        background: "#f5f7fb",
-      }}
-    >
+  style={{
+    display: "flex",
+    flexDirection: isMobile ? "column" : "row",
+    minHeight: "100vh",
+    background: "#f5f7fb",
+  }}
+>
       <ManagerSidebar />
 
-      <div
-        style={{
-          flex: 1,
-         padding: isMobile
-  ? "15px"
-  : "30px",
-        }}
-      >
+    <div
+  style={{
+    flex: 1,
+    width: "100%",
+    padding: isMobile ? "15px" : "30px",
+  }}
+>
         <h1
           style={{
             marginBottom: "10px",
@@ -122,7 +120,7 @@ flexDirection:
     display: "grid",
    gridTemplateColumns:
   isMobile
-    ? "repeat(2,1fr)"
+    ? "1fr 1fr"
     : "repeat(4,1fr)",
     gap: isMobile
   ? "12px"
@@ -154,7 +152,10 @@ flexDirection:
           style={{
             background: "white",
             borderRadius: "20px",
-            padding: "20px",
+           padding: isMobile
+  ? "12px"
+  : "20px",
+    overflow: "hidden",
             boxShadow:
               "0 4px 12px rgba(0,0,0,.05)",
           }}
@@ -189,49 +190,57 @@ flexDirection:
 )}
          <div
   style={{
-    overflowX: "scroll",
+    overflowX: "auto",
+    width: "100%",
+    maxWidth: "100%",
     WebkitOverflowScrolling: "touch",
-    
   }}
 >
-  <table
+ <table
+  style={{
+    minWidth: "1400px",
+    width: "max-content",
+    borderCollapse: "collapse",
+  }}
+>
+          
+           <thead>
+  <tr
     style={{
-      minWidth: "1200px",
-      borderCollapse: "collapse",
+      background: "#f8fafc",
     }}
   >
-          
-           <thead
-  style={{
-    position: "sticky",
-    top: 0,
-    zIndex: 10,
-  }}
->
-              <tr
-  style={{
-    background: "#f8fafc",
-  }}
->
-  <th style={{ padding: "14px" }}>ID</th>
+    <th style={{ padding: "14px" }}>#</th>
 
-  <th style={{ padding: "14px" }}>Title</th>
+    <th style={{ padding: "14px" }}>
+      Title
+    </th>
 
-  <th style={{ padding: "14px" }}>Category</th>
+    <th style={{ padding: "14px" }}>
+      Category
+    </th>
 
-  <th style={{ padding: "14px" }}>Block</th>
+    <th style={{ padding: "14px" }}>
+      Faculty
+    </th>
 
-  <th style={{ padding: "14px" }}>Floor</th>
+    <th style={{ padding: "14px" }}>
+      Location
+    </th>
 
-  <th style={{ padding: "14px" }}>Room</th>
+    <th style={{ padding: "14px" }}>
+      Priority
+    </th>
 
-  <th style={{ padding: "14px" }}>Assigned To</th>
+    <th style={{ padding: "14px" }}>
+      Status
+    </th>
 
-  <th style={{ padding: "14px" }}>Priority</th>
-
-  <th style={{ padding: "14px" }}>Status</th>
-</tr>
-            </thead>
+    <th style={{ padding: "14px" }}>
+      Raised On
+    </th>
+  </tr>
+</thead>
 
             <tbody>
   {currentComplaints.map((c) => (
@@ -242,38 +251,51 @@ flexDirection:
                       "1px solid #e5e7eb",
                   }}
                 >
-                  <td
-                    style={{
-                      padding: "14px",
-                    }}
-                  >
-                    {c.title}
-                  </td>
+                <td
+  style={{
+    padding: "14px",
+    whiteSpace: "nowrap",
+  }}
+>
+  {c.id}
+</td>
 
-                  <td
-                    style={{
-                      padding: "14px",
-                    }}
-                  >
-                    {c.blockName}
-                  </td>
+<td
+  style={{
+    padding: "14px",
+    whiteSpace: "nowrap",
+  }}
+>
+  {c.title}
+</td>
 
-                  <td
-                    style={{
-                      padding: "14px",
-                    }}
-                  >
-                    {c.floor}
-                  </td>
+<td
+  style={{
+    padding: "14px",
+    whiteSpace: "nowrap",
+  }}
+>
+  {c.category}
+</td>
 
-                  <td
-                    style={{
-                      padding: "14px",
-                    }}
-                  >
-                    {c.assignedTo ||
-                      "Not Assigned"}
-                  </td>
+<td
+  style={{
+    padding: "14px",
+    whiteSpace: "nowrap",
+  }}
+>
+  {c.assignedTo || "Not Assigned"}
+</td>
+
+<td
+  style={{
+    padding: "14px",
+    whiteSpace: "nowrap",
+  }}
+>
+  {c.assignedLocation ||
+    `${c.blockName} - Floor ${c.floor}`}
+</td>
 
                   <td
                     style={{
@@ -350,6 +372,18 @@ flexDirection:
     DONE
   </option>
 </select>
+</td>
+<td
+  style={{
+    padding: "14px",
+    whiteSpace: "nowrap",
+  }}
+>
+  {c.createdAt
+    ? new Date(
+        c.createdAt
+      ).toLocaleString()
+    : "-"}
 </td>
                 </tr>
               ))}

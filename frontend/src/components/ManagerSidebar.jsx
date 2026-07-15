@@ -68,14 +68,15 @@ const isMobile = window.innerWidth < 900;
   };
 
   return (
-   <div
-  className="faculty-sidebar"
+  <div
+  className="principal-sidebar"
   style={{
     width: isMobile ? "100%" : "280px",
+    height: isMobile ? "auto" : "100vh",
     minHeight: isMobile ? "auto" : "100vh",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-between",
+    flexShrink: 0,
   }}
 >
 
@@ -84,43 +85,13 @@ const isMobile = window.innerWidth < 900;
         <h1>
           CampusCare AI
         </h1>
-
-        <p className="faculty-subtitle">
+<p className="principal-subtitle">
           Maintenance Manager
         </p>
 
-        <div
-          className="faculty-profile-card"
-          style={{
-  marginTop: "20px",
-  marginBottom: "20px",
-  padding: isMobile ? "15px" : "20px",
-}}
-        >
-          <div className="faculty-avatar">
-            {getInitials()}
-          </div>
+       
 
-          <h3>
-            {user?.name || "Manager"}
-          </h3>
-
-          <p>
-            Maintenance Department
-          </p>
-
-          <p
-            style={{
-              fontSize: "12px",
-              marginTop: "8px",
-              wordBreak: "break-word",
-            }}
-          >
-            {user?.email}
-          </p>
-        </div>
-
-        <div className="faculty-menu">
+        <div className="principal-menu">
 
           <Link
             to="/manager"
@@ -130,22 +101,13 @@ const isMobile = window.innerWidth < 900;
             Dashboard
           </Link>
 
-          <Link
-            to="/manager-profile"
-            style={menuStyle(
-              "/manager-profile"
-            )}
-          >
-            <User size={20} />
-            Profile
-          </Link>
 
         </div>
 
       </div>
 
       <button
-        className="faculty-logout"
+  className="principal-logout"
         onClick={handleLogout}
       >
         <LogOut size={18} />
