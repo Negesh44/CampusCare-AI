@@ -1,78 +1,141 @@
 import {
+  Link,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
+
+import {
   LayoutDashboard,
   User,
   LogOut,
 } from "lucide-react";
 
-import {
-  Link,
-  useNavigate,
-} from "react-router-dom";
-
 function ManagerSidebar() {
 
+  const location = useLocation();
   const navigate = useNavigate();
 
-  const logout = () => {
+  const user = JSON.parse(
+    localStorage.getItem("user")
+  );
 
-    localStorage.clear();
+  const menuStyle = (path) => ({
+    display: "flex",
+    alignItems: "center",
+    gap: "12px",
+    padding: "16px",
+    borderRadius: "14px",
+    textDecoration: "none",
+    color: "white",
+    background:
+      location.pathname === path
+        ? "#2563eb"
+        : "transparent",
+  });
 
-    navigate("/");
+  const handleLogout = () => {
+
+    const confirmLogout =
+      window.confirm(
+        "Are you sure you want to logout?"
+      );
+
+    if (confirmLogout) {
+      localStorage.clear();
+      navigate("/");
+    }
+  };
+
+  const getInitials = () => {
+
+    if (!user?.name) return "MM";
+
+    return user.name
+      .replace("Dr. ", "")
+      .split(" ")
+      .map((word) => word[0])
+      .slice(0, 2)
+      .join("")
+      .toUpperCase();
   };
 
   return (
-    <div
-      style={{
-        width: "260px",
-        background: "#03153F",
-        color: "white",
-        padding: "20px",
-      }}
-    >
-      <h2>
-        CampusCare AI
-      </h2>
+    <div className="faculty-sidebar">
 
-      <p>
-        Maintenance Manager
-      </p>
+      <div>
 
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "15px",
-          marginTop: "30px",
-        }}
-      >
-        <Link
-          to="/manager"
-          style={{ color: "white" }}
+        <h1>
+          CampusCare AI
+        </h1>
+
+        <p className="faculty-subtitle">
+          Maintenance Manager
+        </p>
+
+        <div
+          className="faculty-profile-card"
+          style={{
+            marginTop: "20px",
+            marginBottom: "20px",
+          }}
         >
-          <LayoutDashboard />
-          Dashboard
-        </Link>
+          <div className="faculty-avatar">
+            {getInitials()}
+          </div>
 
-        <Link
-          to="/manager-profile"
-          style={{ color: "white" }}
-        >
-          <User />
-          Profile
-        </Link>
+          <h3>
+            {user?.name || "Manager"}
+          </h3>
+
+          <p>
+            Maintenance Department
+          </p>
+
+          <p
+            style={{
+              fontSize: "12px",
+              marginTop: "8px",
+              wordBreak: "break-word",
+            }}
+          >
+            {user?.email}
+          </p>
+        </div>
+
+        <div className="faculty-menu">
+
+          <Link
+            to="/manager"
+            style={menuStyle("/manager")}
+          >
+            <LayoutDashboard size={20} />
+            Dashboard
+          </Link>
+
+          <Link
+            to="/manager-profile"
+            style={menuStyle(
+              "/manager-profile"
+            )}
+          >
+            <User size={20} />
+            Profile
+          </Link>
+
+        </div>
+
       </div>
 
       <button
-        onClick={logout}
-        style={{
-          marginTop: "50px",
-        }}
+        className="faculty-logout"
+        onClick={handleLogout}
       >
-        <LogOut />
+        <LogOut size={18} />
         Logout
       </button>
+
     </div>
   );
 }
 
-export default ManagerSidebar;
+export default ManagerSidebar;  

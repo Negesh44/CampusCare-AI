@@ -6,6 +6,13 @@ function ManagerProfile() {
     localStorage.getItem("user")
   );
 
+  const initials = user?.name
+    ?.split(" ")
+    .map(word => word[0])
+    .join("")
+    .substring(0, 2)
+    .toUpperCase();
+
   return (
     <div
       style={{
@@ -22,37 +29,135 @@ function ManagerProfile() {
           padding: "40px",
         }}
       >
-        <h1>Manager Profile</h1>
+        <h1
+          style={{
+            marginBottom: "10px",
+          }}
+        >
+          Maintenance Manager Profile
+        </h1>
+
+        <p
+          style={{
+            color: "#64748b",
+            marginBottom: "25px",
+          }}
+        >
+          View maintenance manager information and account details.
+        </p>
 
         <div
           style={{
             background: "white",
             padding: "30px",
             borderRadius: "20px",
-            marginTop: "20px",
+            boxShadow:
+              "0 4px 12px rgba(0,0,0,0.05)",
           }}
         >
-          <h2>{user?.name}</h2>
 
-          <p>
-            <strong>Email:</strong>{" "}
-            {user?.email}
-          </p>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "25px",
+              marginBottom: "30px",
+            }}
+          >
+            <div
+              style={{
+                width: "110px",
+                height: "110px",
+                borderRadius: "50%",
+                background: "#2563eb",
+                color: "white",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                fontSize: "38px",
+                fontWeight: "700",
+              }}
+            >
+              {initials || "MM"}
+            </div>
 
-          <p>
-            <strong>Department:</strong>{" "}
-            {user?.department}
-          </p>
+            <div>
+              <h2
+                style={{
+                  marginBottom: "8px",
+                }}
+              >
+                {user?.name}
+              </h2>
 
-          <p>
-            <strong>Role:</strong>{" "}
-            {user?.role}
-          </p>
+              <p
+                style={{
+                  color: "#64748b",
+                }}
+              >
+                Assistant Manager - Maintenance
+              </p>
+            </div>
+          </div>
 
-          <p>
-            <strong>ID:</strong>{" "}
-            {user?.id}
-          </p>
+          <hr />
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns:
+                "repeat(auto-fit,minmax(250px,1fr))",
+              gap: "20px",
+              marginTop: "25px",
+            }}
+          >
+
+            <div
+              style={{
+                background: "#f8fafc",
+                padding: "18px",
+                borderRadius: "12px",
+              }}
+            >
+              <strong>Email</strong>
+              <p>{user?.email}</p>
+            </div>
+
+            <div
+              style={{
+                background: "#f8fafc",
+                padding: "18px",
+                borderRadius: "12px",
+              }}
+            >
+              <strong>Department</strong>
+              <p>Maintenance</p>
+            </div>
+
+            <div
+              style={{
+                background: "#f8fafc",
+                padding: "18px",
+                borderRadius: "12px",
+              }}
+            >
+              <strong>Role</strong>
+              <p>Maintenance Manager</p>
+            </div>
+
+            <div
+              style={{
+                background: "#f8fafc",
+                padding: "18px",
+                borderRadius: "12px",
+              }}
+            >
+              <strong>Employee ID</strong>
+              <p>MGR-{user?.id}</p>
+            </div>
+
+          </div>
+
         </div>
       </div>
     </div>

@@ -8,7 +8,10 @@ function ManagerDashboard() {
  useEffect(() => {
   loadComplaints();
 }, []);
+const [currentPage, setCurrentPage] =
+  useState(1);
 
+const complaintsPerPage = 8;
   const loadComplaints = async () => {
     try {
       const response = await API.get(
@@ -55,6 +58,24 @@ const progress = complaints.filter(
 const resolved = complaints.filter(
   (c) => c.status === "RESOLVED"
 ).length;
+const indexOfLastComplaint =
+  currentPage * complaintsPerPage;
+
+const indexOfFirstComplaint =
+  indexOfLastComplaint -
+  complaintsPerPage;
+
+const currentComplaints =
+  complaints.slice(
+    indexOfFirstComplaint,
+    indexOfLastComplaint
+  );
+
+const totalPages =
+  Math.ceil(
+    complaints.length /
+    complaintsPerPage
+  );
   return (
     <div
       style={{
@@ -134,7 +155,14 @@ const resolved = complaints.filter(
           >
             All Complaints
           </h2>
-
+<p
+  style={{
+    color: "#64748b",
+    marginBottom: "15px",
+  }}
+>
+  Showing Page {currentPage} of {totalPages}
+</p>
           <table
             style={{
               width: "100%",
@@ -204,7 +232,7 @@ const resolved = complaints.filter(
             </thead>
 
             <tbody>
-              {complaints.map((c) => (
+  {currentComplaints.map((c) => (
                 <tr
                   key={c.id}
                   style={{
@@ -325,10 +353,49 @@ const resolved = complaints.filter(
               ))}
             </tbody>
           </table>
+          <div
+  style={{
+    display: "flex",
+    justifyContent: "center",
+    gap: "8px",
+    marginTop: "20px",
+    flexWrap: "wrap",
+  }}
+>
+  {[...Array(totalPages)].map(
+    (_, index) => (
+      <button
+        key={index}
+        onClick={() =>
+          setCurrentPage(
+            index + 1
+          )
+        }
+        style={{
+          padding: "8px 12px",
+          borderRadius: "8px",
+          border: "none",
+          cursor: "pointer",
+          background:
+            currentPage === index + 1
+              ? "#2563eb"
+              : "#e5e7eb",
+          color:
+            currentPage === index + 1
+              ? "white"
+              : "black",
+          fontWeight: "600",
+        }}
+      >
+        {index + 1}
+      </button>
+    )
+  )}
+</div>
         </div>
       </div>
     </div>
   );
 }
 
-export default ManagerDashboard;
+export default ManagerDashboard;    
