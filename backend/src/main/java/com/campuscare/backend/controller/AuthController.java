@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.campuscare.backend.model.User;
 import com.campuscare.backend.repository.UserRepository;
+
 @RestController
 @RequestMapping("/api/auth")
 
@@ -35,8 +36,7 @@ public class AuthController {
 
         User user = userRepository
                 .findByEmail(email)
-                .orElseThrow(() ->
-                        new RuntimeException("User not found"));
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
         if (!user.getPassword().equals(password)) {
             throw new RuntimeException("Invalid Password");
@@ -44,36 +44,58 @@ public class AuthController {
 
         return user;
     }
-   @PostMapping("/google-login")
-public User googleLogin(
-        @RequestBody Map<String, String> request) {
 
-    String email = request.get("email");
-    String name = request.get("name");
+    @PostMapping("/google-login")
+    public User googleLogin(
+            @RequestBody Map<String, String> request) {
 
-    if (!email.endsWith("@eec.srmrmp.edu.in")) {
-        throw new RuntimeException(
-                "Only college email accounts are allowed");
+        String email = request.get("email");
+        String name = request.get("name");
+
+        if (!email.endsWith("@eec.srmrmp.edu.in")) {
+            throw new RuntimeException(
+                    "Only college email accounts are allowed");
+        }
+
+        User user = userRepository
+                .findByEmail(email)
+                .orElse(null);
+
+        // Faculty / Principal already exists
+        if (user != null) {
+            return user;
+        }
+        if (email.equalsIgnoreCase(
+                "asst.manager.maintenance@srmrmp.edu.in")) {
+
+            user = userRepository
+                    .findByEmail(email)
+                    .orElse(null);
+
+            if (user == null) {
+
+                user = new User();
+
+                user.setName("Muthukumar");
+                user.setEmail(email);
+                user.setRole("MANAGER");
+                user.setDepartment("Maintenance");
+
+                userRepository.save(user);
+            }
+
+            return user;
+        }
+
+        // New Student
+        user = new User();
+
+        user.setName(name);
+        user.setEmail(email);
+        user.setRole("STUDENT");
+        user.setDepartment("ECE");
+        user.setPassword("GOOGLE_LOGIN");
+
+        return userRepository.save(user);
     }
-
-    User user = userRepository
-            .findByEmail(email)
-            .orElse(null);
-
-    // Faculty / Principal already exists
-    if (user != null) {
-        return user;
-    }
-
-    // New Student
-    user = new User();
-
-    user.setName(name);
-    user.setEmail(email);
-    user.setRole("STUDENT");
-    user.setDepartment("ECE");
-    user.setPassword("GOOGLE_LOGIN");
-
-    return userRepository.save(user);
-}
 }

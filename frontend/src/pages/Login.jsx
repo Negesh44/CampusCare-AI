@@ -39,18 +39,17 @@ localStorage.setItem(
       );
 
       if (user.role === "STUDENT") {
-        navigate("/student");
-      }
-      else if (
-        user.role === "FACULTY"
-      ) {
-        navigate("/faculty");
-      }
-      else if (
-        user.role === "PRINCIPAL"
-      ) {
-        navigate("/principal");
-      }
+  navigate("/student");
+}
+else if (user.role === "FACULTY") {
+  navigate("/faculty");
+}
+else if (user.role === "PRINCIPAL") {
+  navigate("/principal");
+}
+else if (user.role === "MANAGER") {
+  navigate("/manager");
+}
 
     } catch (error) {
 
@@ -97,15 +96,18 @@ localStorage.setItem(
       JSON.stringify(user)
     );
 
-    if (user.role === "STUDENT") {
-      navigate("/student");
-    }
-    else if (user.role === "FACULTY") {
-      navigate("/faculty");
-    }
-    else if (user.role === "PRINCIPAL") {
-      navigate("/principal");
-    }
+ if (user.role === "STUDENT") {
+  navigate("/student");
+}
+else if (user.role === "FACULTY") {
+  navigate("/faculty");
+}
+else if (user.role === "PRINCIPAL") {
+  navigate("/principal");
+}
+else if (user.role === "MANAGER") {
+  navigate("/manager");
+}
 
   } catch (error) {
     console.error(error);
