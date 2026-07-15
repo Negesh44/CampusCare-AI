@@ -18,6 +18,7 @@ import FacultyProfile from "./pages/FacultyProfile";
 import PrincipalDashboard from "./pages/PrincipalDashboard";
 import PrincipalProfile from "./pages/PrincipalProfile";
 import ManagerDashboard from "./pages/ManagerDashboard";
+import ManagerProfile from "./pages/ManagerProfile";
 function App() {
   return (
     <BrowserRouter>
@@ -67,6 +68,10 @@ function App() {
         <Route
   path="/manager"
   element={<ManagerDashboard />}
+/>
+    <Route
+  path="/manager-profile"
+  element={<ManagerProfile />}
 />
         <Route
           path="/principal-profile"
