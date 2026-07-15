@@ -4,7 +4,8 @@ import ManagerSidebar from "../components/ManagerSidebar";
 
 function ManagerDashboard() {
   const [complaints, setComplaints] = useState([]);
-
+const isMobile =
+  window.innerWidth < 900;
  useEffect(() => {
   loadComplaints();
 }, []);
@@ -80,6 +81,8 @@ const totalPages =
     <div
       style={{
         display: "flex",
+flexDirection:
+  isMobile ? "column" : "row",
         minHeight: "100vh",
         background: "#f5f7fb",
       }}
@@ -89,13 +92,17 @@ const totalPages =
       <div
         style={{
           flex: 1,
-          padding: "30px",
+         padding: isMobile
+  ? "15px"
+  : "30px",
         }}
       >
         <h1
           style={{
             marginBottom: "10px",
-            fontSize: "32px",
+            fontSize: isMobile
+  ? "24px"
+  : "32px",
             color: "#111827",
           }}
         >
@@ -113,9 +120,13 @@ const totalPages =
 <div
   style={{
     display: "grid",
-    gridTemplateColumns:
-      "repeat(4,1fr)",
-    gap: "20px",
+   gridTemplateColumns:
+  isMobile
+    ? "repeat(2,1fr)"
+    : "repeat(4,1fr)",
+    gap: isMobile
+  ? "12px"
+  : "20px",
     marginBottom: "25px",
   }}
 >
@@ -158,77 +169,68 @@ const totalPages =
 <p
   style={{
     color: "#64748b",
-    marginBottom: "15px",
+    marginBottom: "5px",
   }}
 >
   Showing Page {currentPage} of {totalPages}
 </p>
-          <table
-            style={{
-              width: "100%",
-              borderCollapse: "collapse",
-            }}
-          >
-            <thead>
+
+{isMobile && (
+  <div
+    style={{
+      color: "#2563eb",
+      fontSize: "13px",
+      marginBottom: "15px",
+      fontWeight: "500",
+    }}
+  >
+    ← Swipe left / right to view all columns →
+  </div>
+)}
+         <div
+  style={{
+    overflowX: "scroll",
+    WebkitOverflowScrolling: "touch",
+    
+  }}
+>
+  <table
+    style={{
+      minWidth: "1200px",
+      borderCollapse: "collapse",
+    }}
+  >
+          
+           <thead
+  style={{
+    position: "sticky",
+    top: 0,
+    zIndex: 10,
+  }}
+>
               <tr
-                style={{
-                  background: "#f8fafc",
-                }}
-              >
-                <th
-                  style={{
-                    padding: "14px",
-                    textAlign: "left",
-                  }}
-                >
-                  Title
-                </th>
+  style={{
+    background: "#f8fafc",
+  }}
+>
+  <th style={{ padding: "14px" }}>ID</th>
 
-                <th
-                  style={{
-                    padding: "14px",
-                    textAlign: "left",
-                  }}
-                >
-                  Block
-                </th>
+  <th style={{ padding: "14px" }}>Title</th>
 
-                <th
-                  style={{
-                    padding: "14px",
-                    textAlign: "left",
-                  }}
-                >
-                  Floor
-                </th>
+  <th style={{ padding: "14px" }}>Category</th>
 
-                <th
-                  style={{
-                    padding: "14px",
-                    textAlign: "left",
-                  }}
-                >
-                  Assigned To
-                </th>
+  <th style={{ padding: "14px" }}>Block</th>
 
-                <th
-                  style={{
-                    padding: "14px",
-                    textAlign: "left",
-                  }}
-                >
-                  Priority
-                </th>
+  <th style={{ padding: "14px" }}>Floor</th>
 
-                <th
-                  style={{
-                    padding: "14px",
-                    textAlign: "left",
-                  }}
-                >
-                  Status
-                </th>
-              </tr>
+  <th style={{ padding: "14px" }}>Room</th>
+
+  <th style={{ padding: "14px" }}>Assigned To</th>
+
+  <th style={{ padding: "14px" }}>Priority</th>
+
+  <th style={{ padding: "14px" }}>Status</th>
+</tr>
             </thead>
 
             <tbody>
@@ -352,7 +354,8 @@ const totalPages =
                 </tr>
               ))}
             </tbody>
-          </table>
+            </table>
+</div>
           <div
   style={{
     display: "flex",

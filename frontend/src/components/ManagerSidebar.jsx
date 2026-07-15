@@ -1,3 +1,4 @@
+
 import {
   Link,
   useLocation,
@@ -11,7 +12,7 @@ import {
 } from "lucide-react";
 
 function ManagerSidebar() {
-
+const isMobile = window.innerWidth < 900;   
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -20,18 +21,25 @@ function ManagerSidebar() {
   );
 
   const menuStyle = (path) => ({
-    display: "flex",
-    alignItems: "center",
-    gap: "12px",
-    padding: "16px",
-    borderRadius: "14px",
-    textDecoration: "none",
-    color: "white",
-    background:
-      location.pathname === path
-        ? "#2563eb"
-        : "transparent",
-  });
+  display: "flex",
+  alignItems: "center",
+  gap: "12px",
+
+  padding: isMobile
+    ? "14px"
+    : "16px",
+
+  borderRadius: "14px",
+
+  textDecoration: "none",
+
+  color: "white",
+
+  background:
+    location.pathname === path
+      ? "#2563eb"
+      : "transparent",
+});
 
   const handleLogout = () => {
 
@@ -60,7 +68,16 @@ function ManagerSidebar() {
   };
 
   return (
-    <div className="faculty-sidebar">
+   <div
+  className="faculty-sidebar"
+  style={{
+    width: isMobile ? "100%" : "280px",
+    minHeight: isMobile ? "auto" : "100vh",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+  }}
+>
 
       <div>
 
@@ -75,9 +92,10 @@ function ManagerSidebar() {
         <div
           className="faculty-profile-card"
           style={{
-            marginTop: "20px",
-            marginBottom: "20px",
-          }}
+  marginTop: "20px",
+  marginBottom: "20px",
+  padding: isMobile ? "15px" : "20px",
+}}
         >
           <div className="faculty-avatar">
             {getInitials()}

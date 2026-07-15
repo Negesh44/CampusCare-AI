@@ -116,3 +116,44 @@
   padding:6px 12px;
   border-radius:20px;
 }
+.manager-card {
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.05);
+}
+
+@media (max-width: 900px) {
+  .manager-card {
+    padding: 15px;
+  }
+
+  .manager-card h3 {
+    font-size: 14px;
+  }
+
+  .manager-card h2 {
+    font-size: 24px;
+  }
+}
+@media (max-width: 900px) {
+  .faculty-sidebar {
+    width: 100% !important;
+    min-height: auto !important;
+  }
+
+  .faculty-menu {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+  }
+
+  .faculty-menu a {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .faculty-logout {
+    margin-top: 15px;
+  }
+}
