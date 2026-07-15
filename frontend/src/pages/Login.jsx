@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
@@ -9,7 +9,9 @@ import "./Login.css";
 
 function Login() {
   const navigate = useNavigate();
-
+useEffect(() => {
+  localStorage.clear();
+}, []);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
