@@ -285,33 +285,41 @@ const resolved = complaints.filter(
     padding: "14px",
   }}
 >
-  <select
-    value={c.status}
-    onChange={(e) =>
-      updateStatus(
-        c.id,
-        e.target.value
-      )
-    }
-    style={{
-      padding: "8px",
-      borderRadius: "8px",
-      border: "1px solid #ddd",
-      cursor: "pointer",
-    }}
-  >
-    <option value="OPEN">
-      OPEN
-    </option>
+ <select
+  value={c.status}
+  disabled={c.status === "RESOLVED"}
+  onChange={(e) =>
+    updateStatus(
+      c.id,
+      e.target.value
+    )
+  }
+  style={{
+    padding: "8px",
+    borderRadius: "8px",
+    border: "1px solid #ddd",
+    cursor:
+      c.status === "RESOLVED"
+        ? "not-allowed"
+        : "pointer",
+    background:
+      c.status === "RESOLVED"
+        ? "#dcfce7"
+        : "white",
+  }}
+>
+  <option value="OPEN">
+    OPEN
+  </option>
 
-    <option value="IN_PROGRESS">
-      IN_PROGRESS
-    </option>
+  <option value="IN_PROGRESS">
+    IN PROGRESS
+  </option>
 
-    <option value="RESOLVED">
-      RESOLVED
-    </option>
-  </select>
+  <option value="RESOLVED">
+    DONE
+  </option>
+</select>
 </td>
                 </tr>
               ))}

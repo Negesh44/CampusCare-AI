@@ -15,3 +15,104 @@
   margin-top:10px;
   font-size:30px;
 }
+.manager-container{
+  display:flex;
+  min-height:100vh;
+  background:#f5f7fb;
+}
+
+.manager-main{
+  flex:1;
+  padding:25px;
+  overflow-y:auto;
+}
+
+.manager-cards{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
+  margin-bottom:25px;
+}
+
+.manager-card{
+  background:white;
+  padding:20px;
+  border-radius:18px;
+  box-shadow:0 4px 12px rgba(0,0,0,.05);
+}
+
+.manager-card h3{
+  color:#64748b;
+  font-size:14px;
+}
+
+.manager-card h2{
+  margin-top:10px;
+  font-size:32px;
+}
+
+.manager-table{
+  background:white;
+  border-radius:20px;
+  padding:20px;
+  box-shadow:0 4px 12px rgba(0,0,0,.05);
+}
+
+.manager-table table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+.manager-table th{
+  text-align:left;
+  padding:14px;
+  background:#f8fafc;
+}
+
+.manager-table td{
+  padding:14px;
+  border-bottom:1px solid #e5e7eb;
+}
+@media(max-width:900px){
+
+  .manager-container{
+    display:block;
+  }
+
+  .manager-main{
+    width:100%;
+    padding:15px;
+  }
+
+  .manager-cards{
+    grid-template-columns:1fr;
+  }
+
+  .manager-table{
+    overflow-x:auto;
+  }
+
+  .manager-table table{
+    min-width:900px;
+  }
+}
+.status-open{
+  background:#fef3c7;
+  color:#b45309;
+  padding:6px 12px;
+  border-radius:20px;
+}
+
+.status-progress{
+  background:#dbeafe;
+  color:#2563eb;
+  padding:6px 12px;
+  border-radius:20px;
+}
+
+.status-done{
+  background:#dcfce7;
+  color:#16a34a;
+  padding:6px 12px;
+  border-radius:20px;
+}
