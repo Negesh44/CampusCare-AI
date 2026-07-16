@@ -4,6 +4,10 @@ import ManagerSidebar from "../components/ManagerSidebar";
 
 function ManagerDashboard() {
   const [complaints, setComplaints] = useState([]);
+  const [searchTerm, setSearchTerm] =
+  useState("");
+  const [statusFilter, setStatusFilter] =
+  useState("ALL");
 const isMobile =
   window.innerWidth < 900;
  useEffect(() => {
@@ -66,15 +70,46 @@ const indexOfFirstComplaint =
   indexOfLastComplaint -
   complaintsPerPage;
 
+const filteredComplaints =
+  complaints.filter((c) => {
+
+    const matchesSearch =
+      c.title
+        ?.toLowerCase()
+        .includes(
+          searchTerm.toLowerCase()
+        ) ||
+      c.category
+        ?.toLowerCase()
+        .includes(
+          searchTerm.toLowerCase()
+        ) ||
+      c.blockName
+        ?.toLowerCase()
+        .includes(
+          searchTerm.toLowerCase()
+        );
+
+    const matchesStatus =
+      statusFilter === "ALL"
+        ? true
+        : c.status === statusFilter;
+
+    return (
+      matchesSearch &&
+      matchesStatus
+    );
+  });
+
 const currentComplaints =
-  complaints.slice(
+  filteredComplaints.slice(
     indexOfFirstComplaint,
     indexOfLastComplaint
   );
 
 const totalPages =
   Math.ceil(
-    complaints.length /
+    filteredComplaints.length /
     complaintsPerPage
   );
   return (
@@ -167,6 +202,64 @@ const totalPages =
           >
             All Complaints
           </h2>
+          <div
+  style={{
+    display: "flex",
+    gap: "15px",
+    marginBottom: "20px",
+    flexWrap: "wrap",
+  }}
+>
+  <input
+    type="text"
+    placeholder="Search complaints..."
+    value={searchTerm}
+    onChange={(e) =>
+      setSearchTerm(
+        e.target.value
+      )
+    }
+    style={{
+      flex: 1,
+      minWidth: "250px",
+      padding: "12px",
+      borderRadius: "10px",
+      border: "1px solid #ddd",
+      fontSize: "14px",
+    }}
+  />
+
+  <select
+    value={statusFilter}
+    onChange={(e) =>
+      setStatusFilter(
+        e.target.value
+      )
+    }
+    style={{
+      padding: "12px",
+      borderRadius: "10px",
+      border: "1px solid #ddd",
+      minWidth: "180px",
+    }}
+  >
+    <option value="ALL">
+      All Status
+    </option>
+
+    <option value="OPEN">
+      Open
+    </option>
+
+    <option value="IN_PROGRESS">
+      In Progress
+    </option>
+
+    <option value="RESOLVED">
+      Done
+    </option>
+  </select>
+</div>
 <p
   style={{
     color: "#64748b",
@@ -198,7 +291,7 @@ const totalPages =
 >
  <table
   style={{
-    minWidth: "1400px",
+    minWidth: "1100px",
     width: "max-content",
     borderCollapse: "collapse",
   }}
@@ -210,33 +303,31 @@ const totalPages =
       background: "#f8fafc",
     }}
   >
-    <th style={{ padding: "14px" }}>#</th>
+    <th style={{ padding: "10px" }}>#</th>
 
-    <th style={{ padding: "14px" }}>
+    <th style={{ padding: "10px" }}>
       Title
     </th>
 
-    <th style={{ padding: "14px" }}>
+    <th style={{ padding: "10px" }}>
       Category
     </th>
 
-    <th style={{ padding: "14px" }}>
-      Faculty
-    </th>
+    
 
-    <th style={{ padding: "14px" }}>
+    <th style={{ padding: "10px" }}>
       Location
     </th>
 
-    <th style={{ padding: "14px" }}>
+    <th style={{ padding: "10px" }}>
       Priority
     </th>
 
-    <th style={{ padding: "14px" }}>
+    <th style={{ padding: "10px" }}>
       Status
     </th>
 
-    <th style={{ padding: "14px" }}>
+    <th style={{ padding: "10px" }}>
       Raised On
     </th>
   </tr>
@@ -253,7 +344,7 @@ const totalPages =
                 >
                 <td
   style={{
-    padding: "14px",
+    padding: "10px",
     whiteSpace: "nowrap",
   }}
 >
@@ -262,7 +353,7 @@ const totalPages =
 
 <td
   style={{
-    padding: "14px",
+    padding: "10px",
     whiteSpace: "nowrap",
   }}
 >
@@ -271,25 +362,18 @@ const totalPages =
 
 <td
   style={{
-    padding: "14px",
+    padding: "10px",
     whiteSpace: "nowrap",
   }}
 >
   {c.category}
 </td>
 
-<td
-  style={{
-    padding: "14px",
-    whiteSpace: "nowrap",
-  }}
->
-  {c.assignedTo || "Not Assigned"}
-</td>
+
 
 <td
   style={{
-    padding: "14px",
+    padding: "10px",
     whiteSpace: "nowrap",
   }}
 >
@@ -299,7 +383,7 @@ const totalPages =
 
                   <td
                     style={{
-                      padding: "14px",
+                      padding: "10px",
                     }}
                   >
                     <span
@@ -334,7 +418,7 @@ const totalPages =
 
                   <td
   style={{
-    padding: "14px",
+    padding: "10px",
   }}
 >
  <select
@@ -375,7 +459,7 @@ const totalPages =
 </td>
 <td
   style={{
-    padding: "14px",
+    padding: "10px",
     whiteSpace: "nowrap",
   }}
 >
