@@ -5,6 +5,8 @@ function Profile() {
   const user = JSON.parse(
     localStorage.getItem("user")
   );
+  const isMobile =
+  window.innerWidth < 768;
 
   return (
     <div className="dashboard-container">
@@ -41,21 +43,36 @@ function Profile() {
             style={{
               background: "#ffffff",
               borderRadius: "20px",
-              padding: "30px",
+              padding: isMobile
+  ? "20px"
+  : "30px",
               boxShadow:
                 "0 4px 12px rgba(0,0,0,0.05)",
             }}
           >
             {/* Profile Header */}
             <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "20px",
-                marginBottom: "30px",
-              }}
-            >
+  style={{
+    display: "flex",
+    flexDirection: isMobile
+      ? "column"
+      : "row",
+    alignItems: isMobile
+      ? "center"
+      : "flex-start",
+    gap: "20px",
+    marginBottom: "30px",
+  }}
+>
               <div
+  style={{
+    flex: 1,
+    minWidth: 0,
+    textAlign: isMobile
+      ? "center"
+      : "left",
+  }}
+>
                 style={{
                   width: "90px",
                   height: "90px",
@@ -78,21 +95,29 @@ function Profile() {
 
               <div>
                 <h2
-                  style={{
-                    margin: 0,
-                    fontSize: "32px",
-                  }}
-                >
+  style={{
+    margin: 0,
+    fontSize: isMobile
+      ? "28px"
+      : "32px",
+    wordBreak: "break-word",
+    overflowWrap: "break-word",
+  }}
+>
                   {user?.name}
                 </h2>
 
                 <p
-                  style={{
-                    margin: 0,
-                    color: "#6b7280",
-                    fontSize: "18px",
-                  }}
-                >
+  style={{
+    margin: 0,
+    color: "#6b7280",
+    fontSize: isMobile
+      ? "16px"
+      : "18px",
+    wordBreak: "break-word",
+    overflowWrap: "break-word",
+  }}
+>
                   B.E Computer Science &
                   Engineering (Artificial
                   Intelligence and Machine
