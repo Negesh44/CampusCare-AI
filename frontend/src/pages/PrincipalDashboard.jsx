@@ -554,7 +554,7 @@ const paginatedComplaints =
           </table>
 
         </div>
-        </div>
+        
 <div
   className="analytics-card"
   style={{
