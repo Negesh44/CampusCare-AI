@@ -1,20 +1,18 @@
 import Sidebar from "../components/Sidebar";
 
-
 function Profile() {
   const user = JSON.parse(
     localStorage.getItem("user")
   );
+
   const isMobile =
-  window.innerWidth < 768;
+    window.innerWidth < 768;
 
   return (
     <div className="dashboard-container">
       <Sidebar />
 
       <div className="main-content">
-        
-
         <div
           style={{
             padding: "30px",
@@ -44,36 +42,28 @@ function Profile() {
               background: "#ffffff",
               borderRadius: "20px",
               padding: isMobile
-  ? "20px"
-  : "30px",
+                ? "20px"
+                : "30px",
               boxShadow:
                 "0 4px 12px rgba(0,0,0,0.05)",
             }}
           >
             {/* Profile Header */}
             <div
-  style={{
-    display: "flex",
-    flexDirection: isMobile
-      ? "column"
-      : "row",
-    alignItems: isMobile
-      ? "center"
-      : "flex-start",
-    gap: "20px",
-    marginBottom: "30px",
-  }}
->
+              style={{
+                display: "flex",
+                flexDirection: isMobile
+                  ? "column"
+                  : "row",
+                alignItems: isMobile
+                  ? "center"
+                  : "flex-start",
+                gap: "20px",
+                marginBottom: "30px",
+              }}
+            >
+              {/* Avatar */}
               <div
-  style={{
-    flex: 1,
-    minWidth: 0,
-    textAlign: isMobile
-      ? "center"
-      : "left",
-  }}
->
-  <div
                 style={{
                   width: "90px",
                   height: "90px",
@@ -85,44 +75,55 @@ function Profile() {
                   alignItems: "center",
                   fontSize: "32px",
                   fontWeight: "700",
+                  flexShrink: 0,
                 }}
               >
-               {user?.name
-  ?.split(" ")
-  .map(n => n[0])
-  .join("")
-  .substring(0,2)}
+                {user?.name
+                  ?.split(" ")
+                  .map((n) => n[0])
+                  .join("")
+                  .substring(0, 2)}
               </div>
 
-              <div>
+              {/* Details */}
+              <div
+                style={{
+                  flex: 1,
+                  minWidth: 0,
+                  textAlign: isMobile
+                    ? "center"
+                    : "left",
+                }}
+              >
                 <h2
-  style={{
-    margin: 0,
-    fontSize: isMobile
-      ? "28px"
-      : "32px",
-    wordBreak: "break-word",
-    overflowWrap: "break-word",
-  }}
->
+                  style={{
+                    margin: 0,
+                    fontSize: isMobile
+                      ? "28px"
+                      : "32px",
+                    wordBreak:
+                      "break-word",
+                  }}
+                >
                   {user?.name}
                 </h2>
 
                 <p
-  style={{
-    margin: 0,
-    color: "#6b7280",
-    fontSize: isMobile
-      ? "16px"
-      : "18px",
-    wordBreak: "break-word",
-    overflowWrap: "break-word",
-  }}
->
+                  style={{
+                    marginTop: "10px",
+                    color: "#6b7280",
+                    fontSize: isMobile
+                      ? "16px"
+                      : "18px",
+                    lineHeight: "1.5",
+                    wordBreak:
+                      "break-word",
+                  }}
+                >
                   B.E Computer Science &
-                  Engineering (Artificial
-                  Intelligence and Machine
-                  Learning)
+                  Engineering
+                  (Artificial Intelligence
+                  and Machine Learning)
                 </p>
               </div>
             </div>
@@ -142,7 +143,7 @@ function Profile() {
 
             <div
               style={{
-                lineHeight: "2.4",
+                lineHeight: "2.2",
                 fontSize: "17px",
               }}
             >
@@ -153,12 +154,10 @@ function Profile() {
                 23AIML001
               </p>
 
-             
-
               <p>
                 <strong>Year:</strong>{" "}
                 III Year
-              </p>  
+              </p>
 
               <p>
                 <strong>
@@ -166,8 +165,6 @@ function Profile() {
                 </strong>{" "}
                 {user?.email}
               </p>
-
-              
             </div>
 
             {/* Account Information */}
@@ -183,7 +180,7 @@ function Profile() {
 
             <div
               style={{
-                lineHeight: "2.4",
+                lineHeight: "2.2",
                 fontSize: "17px",
               }}
             >
