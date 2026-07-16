@@ -1,7 +1,6 @@
 .principal-container{
   display:flex;
-  height:100vh;
-  overflow:hidden;
+  min-height:100vh;
   background:#f5f7fb;
 }
 
@@ -434,10 +433,15 @@ td{
   vertical-align:middle;
 }
 .table-container{
+  width:100%;
   overflow-x:auto;
-  border-radius:16px;
+  overflow-y:hidden;
+  -webkit-overflow-scrolling:touch;
 }
-
+.table-container table{
+  min-width:1200px;
+  width:max-content;
+}
 thead{
   background:#f8fafc;
 }

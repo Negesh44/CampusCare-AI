@@ -481,11 +481,11 @@ const paginatedComplaints =
 >
 
   <h2>
-    👨‍🏫 Faculty Performance
-  </h2>
+  👨‍🏫 Faculty Performance
+</h2>
 
-          <table>
-
+<div className="table-container">
+  <table>
             <thead>
 
               <tr>
