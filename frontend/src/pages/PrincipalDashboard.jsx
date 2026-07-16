@@ -343,10 +343,20 @@ const paginatedComplaints =
       </option>
 
     </select>
+      </div>
+  {window.innerWidth < 900 && (
+  <p
+    style={{
+      color: "#2563eb",
+      fontSize: "13px",
+      marginBottom: "10px",
+    }}
+  >
+    ← Swipe left / right to view all columns →
+  </p>
+)}
 
-  </div>
-
-         <div className="table-container">
+<div className="table-container">
 <table>
 
   <thead>
@@ -480,9 +490,21 @@ const paginatedComplaints =
   }}
 >
 
-  <h2>
+ <h2>
   👨‍🏫 Faculty Performance
 </h2>
+</div>
+{window.innerWidth < 900 && (
+  <p
+    style={{
+      color: "#2563eb",
+      fontSize: "13px",
+      marginBottom: "10px",
+    }}
+  >
+    ← Swipe left / right to view all columns →
+  </p>
+)}
 
 <div className="table-container">
   <table>
@@ -531,6 +553,7 @@ const paginatedComplaints =
 
           </table>
 
+        </div>
         </div>
 <div
   className="analytics-card"
