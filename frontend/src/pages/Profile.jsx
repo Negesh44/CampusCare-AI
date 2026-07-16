@@ -73,6 +73,7 @@ function Profile() {
       : "left",
   }}
 >
+  <div
                 style={{
                   width: "90px",
                   height: "90px",
