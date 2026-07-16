@@ -125,7 +125,17 @@ function FacultyDashboard() {
             </span>
 
           </div>
-
+{window.innerWidth < 900 && (
+  <p
+    style={{
+      color: "#2563eb",
+      fontSize: "13px",
+      marginBottom: "10px",
+    }}
+  >
+    ← Swipe left / right to view all columns →
+  </p>
+)}
           <div className="table-wrapper">
 
             <table>
