@@ -127,12 +127,7 @@ function Profile() {
                 23AIML001
               </p>
 
-              <p>
-                <strong>
-                  Department:
-                </strong>{" "}
-                CSE (AIML)
-              </p>
+             
 
               <p>
                 <strong>Year:</strong>{" "}
@@ -146,12 +141,7 @@ function Profile() {
                 {user?.email}
               </p>
 
-              <p>
-                <strong>
-                  Contact Number:
-                </strong>{" "}
-                +91 XXXXX XXXXX
-              </p>
+              
             </div>
 
             {/* Account Information */}
