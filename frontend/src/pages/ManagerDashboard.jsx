@@ -256,7 +256,7 @@ return (
            padding: isMobile
   ? "12px"
   : "20px",
-    overflow: "hidden",
+    overflowX: "auto",
             boxShadow:
               "0 4px 12px rgba(0,0,0,.05)",
           }}
@@ -421,18 +421,16 @@ return (
     ← Swipe left / right to view all columns →
   </div>
 )}
-         <div
+        <div
   style={{
-    overflowX: "auto",
+    overflowX: "scroll",
     width: "100%",
-    maxWidth: "100%",
     WebkitOverflowScrolling: "touch",
   }}
 >
  <table
   style={{
-    minWidth: "1100px",
-    width: "max-content",
+    minWidth: "1500px",
     borderCollapse: "collapse",
   }}
 >
