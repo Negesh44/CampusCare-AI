@@ -309,15 +309,19 @@ const totalPages =
       Title
     </th>
 
-    <th style={{ padding: "10px" }}>
-      Category
-    </th>
+    
 
     
 
     <th style={{ padding: "10px" }}>
       Location
     </th>
+    <th style={{ padding: "10px" }}>
+  Room
+</th>
+<th style={{ padding: "10px" }}>
+  Incharge Faculty
+</th>
 
     <th style={{ padding: "10px" }}>
       Priority
@@ -330,6 +334,9 @@ const totalPages =
     <th style={{ padding: "10px" }}>
       Raised On
     </th>
+    <th style={{ padding: "10px" }}>
+  Date Completed
+</th>
   </tr>
 </thead>
 
@@ -359,7 +366,6 @@ const totalPages =
 >
   {c.title}
 </td>
-
 <td
   style={{
     padding: "10px",
@@ -380,7 +386,22 @@ const totalPages =
   {c.assignedLocation ||
     `${c.blockName} - Floor ${c.floor}`}
 </td>
-
+<td
+  style={{
+    padding: "10px",
+    whiteSpace: "nowrap",
+  }}
+>
+  {c.roomNumber || "-"}
+</td>
+<td
+  style={{
+    padding: "10px",
+    whiteSpace: "nowrap",
+  }}
+>
+  {c.assignedTo || "-"}
+</td>
                   <td
                     style={{
                       padding: "10px",
@@ -466,6 +487,18 @@ const totalPages =
   {c.createdAt
     ? new Date(
         c.createdAt
+      ).toLocaleString()
+    : "-"}
+</td>
+<td
+  style={{
+    padding: "10px",
+    whiteSpace: "nowrap",
+  }}
+>
+  {c.resolvedAt
+    ? new Date(
+        c.resolvedAt
       ).toLocaleString()
     : "-"}
 </td>
