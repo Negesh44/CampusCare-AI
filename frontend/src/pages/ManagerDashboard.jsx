@@ -339,31 +339,7 @@ return (
     }}
   >
     ✅ Done
-  </button>
-</div>
-  <button
-    onClick={() => exportCSV("ALL")}
-  >
-    Export All
-  </button>
-
-  <button
-    onClick={() => exportCSV("OPEN")}
-  >
-    Export Open
-  </button>
-
-  <button
-    onClick={() => exportCSV("IN_PROGRESS")}
-  >
-    Export Pending
-  </button>
-
-  <button
-    onClick={() => exportCSV("RESOLVED")}
-  >
-    Export Done
-  </button>
+  
 </div>
           <div
   style={{
