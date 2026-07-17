@@ -73,22 +73,16 @@ const indexOfFirstComplaint =
 const filteredComplaints =
   complaints.filter((c) => {
 
-    const matchesSearch =
-      c.title
-        ?.toLowerCase()
-        .includes(
-          searchTerm.toLowerCase()
-        ) ||
-      c.category
-        ?.toLowerCase()
-        .includes(
-          searchTerm.toLowerCase()
-        ) ||
-      c.blockName
-        ?.toLowerCase()
-        .includes(
-          searchTerm.toLowerCase()
-        );
+    const search = searchTerm.toLowerCase();
+
+const matchesSearch =
+  c.title?.toLowerCase().includes(search) ||
+  c.category?.toLowerCase().includes(search) ||
+  c.blockName?.toLowerCase().includes(search) ||
+  c.roomNumber?.toString().includes(search) ||
+  c.assignedTo?.toLowerCase().includes(search) ||
+  c.priority?.toLowerCase().includes(search) ||
+  c.status?.toLowerCase().includes(search);
 
     const matchesStatus =
       statusFilter === "ALL"
@@ -112,7 +106,79 @@ const totalPages =
     filteredComplaints.length /
     complaintsPerPage
   );
-  return (
+
+const exportCSV = (type) => {
+
+  let data = complaints;
+
+  if (type === "OPEN") {
+    data = complaints.filter(
+      c => c.status === "OPEN"
+    );
+  }
+
+  if (type === "IN_PROGRESS") {
+    data = complaints.filter(
+      c => c.status === "IN_PROGRESS"
+    );
+  }
+
+  if (type === "RESOLVED") {
+    data = complaints.filter(
+      c => c.status === "RESOLVED"
+    );
+  }
+
+  const csvRows = [];
+
+  csvRows.push([
+    "Title",
+    "Category",
+    "Location",
+    "Room",
+    "Faculty",
+    "Priority",
+    "Status",
+    "Raised On",
+    "Completed On"
+  ].join(","));
+
+  data.forEach((c) => {
+
+    csvRows.push([
+      c.title,
+      c.category,
+      c.assignedLocation,
+      c.roomNumber,
+      c.assignedTo,
+      c.priority,
+      c.status,
+      c.createdAt,
+      c.resolvedAt || ""
+    ].join(","));
+
+  });
+
+  const blob = new Blob(
+    [csvRows.join("\n")],
+    { type: "text/csv" }
+  );
+
+  const url =
+    window.URL.createObjectURL(blob);
+
+  const link =
+    document.createElement("a");
+
+  link.href = url;
+
+  link.download =
+    `${type.toLowerCase()}_complaints.csv`;
+
+  link.click();
+};
+
+return (
     <div
   style={{
     display: "flex",
@@ -196,12 +262,45 @@ const totalPages =
           }}
         >
           <h2
-            style={{
-              marginBottom: "20px",
-            }}
-          >
-            All Complaints
-          </h2>
+  style={{
+    marginBottom: "20px",
+  }}
+>
+  All Complaints
+</h2>
+
+<div
+  style={{
+    display: "flex",
+    gap: "10px",
+    marginBottom: "15px",
+    flexWrap: "wrap",
+  }}
+>
+  <button
+    onClick={() => exportCSV("ALL")}
+  >
+    Export All
+  </button>
+
+  <button
+    onClick={() => exportCSV("OPEN")}
+  >
+    Export Open
+  </button>
+
+  <button
+    onClick={() => exportCSV("IN_PROGRESS")}
+  >
+    Export Pending
+  </button>
+
+  <button
+    onClick={() => exportCSV("RESOLVED")}
+  >
+    Export Done
+  </button>
+</div>
           <div
   style={{
     display: "flex",
