@@ -147,6 +147,9 @@ function FacultyDashboard() {
     <th>Title</th>
     <th>Category</th>
     <th>Location</th>
+     <th className="room-column">
+      Room
+    </th>
     <th>Status</th>
 
     <th className="priority-col">
@@ -174,6 +177,9 @@ function FacultyDashboard() {
                     <td>
   {c.assignedLocation ||
     `${c.blockName} - Floor ${c.floor}`}
+</td>
+<td>
+  {c.roomNumber || "-"}
 </td>
                     <td>
 
