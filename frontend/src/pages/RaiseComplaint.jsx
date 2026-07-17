@@ -68,7 +68,10 @@ const availableFloors =
 const payload = {
   ...complaint,
   status: "OPEN",
+
   studentId: user.id,
+  studentName: user.name,
+  studentEmail: user.email,
 };
 
       await API.post(
