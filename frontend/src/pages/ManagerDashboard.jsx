@@ -421,16 +421,10 @@ return (
     ← Swipe left / right to view all columns →
   </div>
 )}
-        <div
-  style={{
-    overflowX: "scroll",
-    width: "100%",
-    WebkitOverflowScrolling: "touch",
-  }}
->
+        WebkitOverflowScrolling: "touch",
  <table
   style={{
-    minWidth: "1500px",
+    minWidth: "1700px",
     borderCollapse: "collapse",
   }}
 >
