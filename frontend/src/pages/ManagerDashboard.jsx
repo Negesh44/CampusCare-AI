@@ -303,7 +303,7 @@ const totalPages =
       background: "#f8fafc",
     }}
   >
-    <th style={{ padding: "10px" }}>#</th>
+    
 
     <th style={{ padding: "10px" }}>
       Title

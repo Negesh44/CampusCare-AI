@@ -117,6 +117,18 @@ public List<Complaint> getStudentComplaints(
 
         complaint.setStatus(status);
 
+if ("RESOLVED".equals(status)) {
+
+    complaint.setResolvedAt(
+        LocalDateTime.now(
+            java.time.ZoneId.of(
+                "Asia/Kolkata"
+            )
+        )
+    );
+
+}
+
         Complaint updatedComplaint =
                 repository.save(complaint);
                 complaint.setUpdatedAt(LocalDateTime.now());

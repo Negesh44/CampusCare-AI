@@ -53,6 +53,8 @@ private String studentEmail;
 
     private LocalDateTime updatedAt;
 
+    private LocalDateTime resolvedAt;
+
     public String getStudentName() {
     return studentName;
 }
@@ -234,4 +236,12 @@ protected void onUpdate() {
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
+    public LocalDateTime getResolvedAt() {
+    return resolvedAt;
+}
+
+public void setResolvedAt(
+        LocalDateTime resolvedAt) {
+    this.resolvedAt = resolvedAt;
+}
 }

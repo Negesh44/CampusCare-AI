@@ -28,6 +28,8 @@ public class ComplaintHistory {
 
     private LocalDateTime updatedAt;
 
+    private LocalDateTime resolvedAt;
+
     public ComplaintHistory() {
     }
 
