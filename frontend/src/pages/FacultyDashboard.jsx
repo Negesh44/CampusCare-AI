@@ -112,19 +112,21 @@ function FacultyDashboard() {
 
         <div className="faculty-table-card">
 
-          <div className="table-header">
+         <div className="table-header">
 
-            <h2>
-              Complaint Queue
-            </h2>
+  <h2>
+    Complaint Queue
+  </h2>
 
-            <span>
-              Total Complaints :
-              {" "}
-              {complaints.length}
-            </span>
+  <span
+    style={{
+      marginRight: "30px"
+    }}
+  >
+    Total Complaints : {complaints.length}
+  </span>
 
-          </div>
+</div>
 {window.innerWidth < 900 && (
   <p
     style={{
@@ -142,9 +144,10 @@ function FacultyDashboard() {
 
               <thead>
 
-                <tr>
+               <tr>
   <th>Title</th>
   <th>Category</th>
+  <th>Location</th>
   <th>Status</th>
   <th>Priority</th>
   <th>Raised Date</th>
@@ -167,7 +170,10 @@ function FacultyDashboard() {
                     <td>
                       {c.category}
                     </td>
-
+                    <td>
+  {c.assignedLocation ||
+    `${c.blockName} - Floor ${c.floor}`}
+</td>
                     <td>
 
                       <span
@@ -190,7 +196,13 @@ function FacultyDashboard() {
 
                     </td>
 
-                    <td>{c.priority}</td>
+                    <td
+  style={{
+    width: "90px"
+  }}
+>
+  {c.priority}
+</td>
 
 <td>
   {c.createdAt
