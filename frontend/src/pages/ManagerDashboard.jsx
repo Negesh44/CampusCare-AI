@@ -192,8 +192,8 @@ return (
     <div
   style={{
     flex: 1,
-    width: "100%",
-    padding: isMobile ? "15px" : "30px",
+    width: "75%",
+    padding: isMobile ? "15px" : "15px",
   }}
 >
         <h1
@@ -249,18 +249,18 @@ return (
     <h2>{resolved}</h2>
   </div>
 </div>
-        <div
-          style={{
-            background: "white",
-            borderRadius: "20px",
-           padding: isMobile
-  ? "12px"
-  : "20px",
-    overflowX: "auto",
-            boxShadow:
-              "0 4px 12px rgba(0,0,0,.05)",
-          }}
-        >
+       <div
+  style={{
+    background: "white",
+    borderRadius: "20px",
+    padding: isMobile ? "12px" : "20px",
+    boxShadow:
+      "0 4px 12px rgba(0,0,0,.05)",
+
+    width: "100%",
+    overflow: "hidden",
+  }}
+>
           <h2
   style={{
     marginBottom: "20px",
@@ -423,19 +423,19 @@ return (
 )}
 <div
   style={{
-    overflowX: "scroll",
+    overflowX: "auto",
+    overflowY: "hidden",
     width: "100%",
     WebkitOverflowScrolling: "touch",
   }}
 >
-       
- <table
-  style={{
-    minWidth: "1200px",
-    width: "100%",
-    borderCollapse: "collapse",
-  }}
->
+  <table
+    style={{
+      minWidth: "1500px",
+      borderCollapse: "collapse",
+    }}
+  >
+  
            <thead>
   <tr
     style={{
