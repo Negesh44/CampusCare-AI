@@ -287,3 +287,6 @@ td{
 .priority-col{
   min-width:90px !important;
 }
+.room-column{
+  min-width:80px !important;
+}
