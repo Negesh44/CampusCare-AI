@@ -272,11 +272,75 @@ return (
 <div
   style={{
     display: "flex",
-    gap: "10px",
-    marginBottom: "15px",
+    gap: "12px",
+    marginBottom: "20px",
     flexWrap: "wrap",
   }}
 >
+  <button
+    onClick={() => exportCSV("ALL")}
+    style={{
+      background: "#2563eb",
+      color: "white",
+      border: "none",
+      padding: "10px 18px",
+      borderRadius: "10px",
+      cursor: "pointer",
+      fontWeight: "600",
+      boxShadow: "0 4px 10px rgba(37,99,235,.25)",
+    }}
+  >
+    📊 Export All
+  </button>
+
+  <button
+    onClick={() => exportCSV("OPEN")}
+    style={{
+      background: "#f59e0b",
+      color: "white",
+      border: "none",
+      padding: "10px 18px",
+      borderRadius: "10px",
+      cursor: "pointer",
+      fontWeight: "600",
+      boxShadow: "0 4px 10px rgba(245,158,11,.25)",
+    }}
+  >
+    🟡 Open Issues
+  </button>
+
+  <button
+    onClick={() => exportCSV("IN_PROGRESS")}
+    style={{
+      background: "#3b82f6",
+      color: "white",
+      border: "none",
+      padding: "10px 18px",
+      borderRadius: "10px",
+      cursor: "pointer",
+      fontWeight: "600",
+      boxShadow: "0 4px 10px rgba(59,130,246,.25)",
+    }}
+  >
+    🔵 Pending
+  </button>
+
+  <button
+    onClick={() => exportCSV("RESOLVED")}
+    style={{
+      background: "#22c55e",
+      color: "white",
+      border: "none",
+      padding: "10px 18px",
+      borderRadius: "10px",
+      cursor: "pointer",
+      fontWeight: "600",
+      boxShadow: "0 4px 10px rgba(34,197,94,.25)",
+    }}
+  >
+    ✅ Done
+  </button>
+</div>
   <button
     onClick={() => exportCSV("ALL")}
   >
