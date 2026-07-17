@@ -421,14 +421,21 @@ return (
     ← Swipe left / right to view all columns →
   </div>
 )}
-        WebkitOverflowScrolling: "touch",
+<div
+  style={{
+    overflowX: "scroll",
+    width: "100%",
+    WebkitOverflowScrolling: "touch",
+  }}
+>
+       
  <table
   style={{
-    minWidth: "1700px",
+    minWidth: "1200px",
+    width: "100%",
     borderCollapse: "collapse",
   }}
 >
-          
            <thead>
   <tr
     style={{
@@ -635,6 +642,7 @@ return (
               ))}
             </tbody>
             </table>
+              
 </div>
           <div
   style={{
