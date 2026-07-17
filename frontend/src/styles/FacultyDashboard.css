@@ -271,3 +271,11 @@
 td{
   min-width:180px;
 }
+.faculty-table-card table{
+  min-width:900px;
+}
+
+.faculty-table-card th,
+.faculty-table-card td{
+  white-space:nowrap;
+}

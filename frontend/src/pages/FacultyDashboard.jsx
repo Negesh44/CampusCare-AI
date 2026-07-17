@@ -143,12 +143,14 @@ function FacultyDashboard() {
               <thead>
 
                 <tr>
-                  <th>Title</th>
-                  <th>Category</th>
-                  <th>Status</th>
-                  <th>Priority</th>
-                  <th>Action</th>
-                </tr>
+  <th>Title</th>
+  <th>Category</th>
+  <th>Status</th>
+  <th>Priority</th>
+  <th>Raised Date</th>
+  <th>Resolved Date</th>
+  <th>Action</th>
+</tr>
 
               </thead>
 
@@ -188,11 +190,24 @@ function FacultyDashboard() {
 
                     </td>
 
-                    <td>
-                      {c.priority}
-                    </td>
+                    <td>{c.priority}</td>
 
-                    <td>
+<td>
+  {c.createdAt
+    ? new Date(c.createdAt)
+        .toLocaleString("en-IN")
+    : "-"}
+</td>
+
+<td>
+  {c.status === "RESOLVED" &&
+   c.updatedAt
+    ? new Date(c.updatedAt)
+        .toLocaleString("en-IN")
+    : "-"}
+</td>
+
+<td>
 
                       {c.status === "OPEN" && (
 

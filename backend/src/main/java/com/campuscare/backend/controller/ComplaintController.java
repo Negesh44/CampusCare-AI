@@ -119,7 +119,7 @@ public List<Complaint> getStudentComplaints(
 
         Complaint updatedComplaint =
                 repository.save(complaint);
-
+                complaint.setUpdatedAt(LocalDateTime.now());
         ComplaintHistory history =
                 new ComplaintHistory();
 
