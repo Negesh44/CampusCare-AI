@@ -308,6 +308,10 @@ const totalPages =
     <th style={{ padding: "10px" }}>
       Title
     </th>
+    <th style={{ padding: "10px" }}>
+  Category
+</th>
+
 
     
 
@@ -349,14 +353,7 @@ const totalPages =
                       "1px solid #e5e7eb",
                   }}
                 >
-                <td
-  style={{
-    padding: "10px",
-    whiteSpace: "nowrap",
-  }}
->
-  {c.id}
-</td>
+               
 
 <td
   style={{
