@@ -119,12 +119,12 @@ function FacultyDashboard() {
   </h2>
 
   <span
-    style={{
-      marginRight: "30px"
-    }}
-  >
-    Total Complaints : {complaints.length}
-  </span>
+  style={{
+    marginRight: "80px"
+  }}
+>
+  Total Complaints : {complaints.length}
+</span>
 
 </div>
 {window.innerWidth < 900 && (
@@ -143,20 +143,21 @@ function FacultyDashboard() {
             <table>
 
               <thead>
+  <tr>
+    <th>Title</th>
+    <th>Category</th>
+    <th>Location</th>
+    <th>Status</th>
 
-               <tr>
-  <th>Title</th>
-  <th>Category</th>
-  <th>Location</th>
-  <th>Status</th>
-  <th>Priority</th>
-  <th>Raised Date</th>
-  <th>Resolved Date</th>
-  <th>Action</th>
-</tr>
+    <th className="priority-col">
+      Priority
+    </th>
 
-              </thead>
-
+    <th>Raised Date</th>
+    <th>Resolved Date</th>
+    <th>Action</th>
+  </tr>
+</thead>
               <tbody>
 
                 {complaints.map((c) => (

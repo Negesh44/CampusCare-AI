@@ -152,11 +152,9 @@
   width:100%;
 }
 
+
 .table-wrapper table{
-  min-width:1100px;
-}
-.table-wrapper table{
-  min-width:1000px;
+  min-width:1200px;
   width:max-content;
 }
 
@@ -273,7 +271,10 @@
   }   
   th,
 td{
-  min-width:180px;
+  min-width:120px;
+}
+.priority-col{
+  min-width:90px !important;
 }
 .faculty-table-card table{
   min-width:900px;
@@ -282,4 +283,7 @@ td{
 .faculty-table-card th,
 .faculty-table-card td{
   white-space:nowrap;
+}
+.priority-col{
+  min-width:90px !important;
 }
