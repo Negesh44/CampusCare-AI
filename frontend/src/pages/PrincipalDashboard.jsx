@@ -215,6 +215,72 @@ const paginatedComplaints =
     page *
       itemsPerPage
   );
+  const exportCSV = (type) => {
+
+  let data = complaints;
+
+  if (type === "OPEN") {
+    data = complaints.filter(
+      c => c.status === "OPEN"
+    );
+  }
+
+  if (type === "IN_PROGRESS") {
+    data = complaints.filter(
+      c => c.status === "IN_PROGRESS"
+    );
+  }
+
+  if (type === "RESOLVED") {
+    data = complaints.filter(
+      c => c.status === "RESOLVED"
+    );
+  }
+
+  const rows = [];
+
+  rows.push([
+    "Title",
+    "Category",
+    "Faculty",
+    "Location",
+    "Priority",
+    "Status",
+    "Raised On"
+  ].join(","));
+
+  data.forEach(c => {
+
+    rows.push([
+      c.title,
+      c.category,
+      c.assignedFacultyName,
+      c.assignedLocation,
+      c.priority,
+      c.status,
+      c.createdAt
+    ].join(","));
+
+  });
+
+  const blob = new Blob(
+    [rows.join("\n")],
+    { type: "text/csv" }
+  );
+
+  const url =
+    window.URL.createObjectURL(blob);
+
+  const link =
+    document.createElement("a");
+
+  link.href = url;
+
+  link.download =
+    `${type.toLowerCase()}_complaints.csv`;
+
+  link.click();
+};
   return (
 
     <div className="principal-container">
@@ -273,7 +339,48 @@ const paginatedComplaints =
     marginBottom: "20px",
   }}
 >
+  <div>
   <h2>Complaint Management</h2>
+
+  <div
+    style={{
+      display: "flex",
+      gap: "12px",
+      marginTop: "15px",
+      flexWrap: "wrap",
+    }}
+  >
+
+    <button
+      className="export-btn all"
+      onClick={() => exportCSV("ALL")}
+    >
+      📊 Export All
+    </button>
+
+    <button
+      className="export-btn open"
+      onClick={() => exportCSV("OPEN")}
+    >
+      🟡 Export Open
+    </button>
+
+    <button
+      className="export-btn progress"
+      onClick={() => exportCSV("IN_PROGRESS")}
+    >
+      🔵 Export Pending
+    </button>
+
+    <button
+      className="export-btn done"
+      onClick={() => exportCSV("RESOLVED")}
+    >
+      ✅ Export Done
+    </button>
+
+  </div>
+</div>
 
   <span
     style={{

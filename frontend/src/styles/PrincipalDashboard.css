@@ -284,62 +284,7 @@ tbody tr:hover{
   }
 
 }
-@media (max-width: 768px) {
 
-  table {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-  }
-
-  .principal-cards {
-    grid-template-columns: 1fr !important;
-  }
-
-  .chart-grid {
-    grid-template-columns: 1fr !important;
-  }
-
-}@media (max-width: 900px) {
-
-  .principal-container{
-    display:block;
-  }
-
- .principal-sidebar{
-  width:100%;
-  padding:10px;
-}
-
-.principal-profile-card{
-  display:none;
-}
-
-.principal-logout{
-  width:auto;
-  padding:10px 20px;
-}
-  .principal-main{
-    width:100% !important;
-    margin:0 !important;
-    padding:15px !important;
-  }
-
-  .principal-cards{
-    grid-template-columns:1fr !important;
-  }
-
-  .chart-grid{
-    grid-template-columns:1fr !important;
-  }
-
-  table{
-    display:block;
-    overflow-x:auto;
-    white-space:nowrap;
-  }
-
-}
 /* PRIORITY */
 
 .priority-high{
@@ -484,4 +429,34 @@ tbody tr:nth-child(even){
   transform:translateY(-2px);
   box-shadow:
     0 12px 24px rgba(0,0,0,.08);
+}
+.export-btn{
+  border:none;
+  padding:12px 20px;
+  border-radius:12px;
+  color:white;
+  font-weight:600;
+  cursor:pointer;
+  transition:.3s;
+  box-shadow:0 4px 12px rgba(0,0,0,.15);
+}
+
+.export-btn:hover{
+  transform:translateY(-2px);
+}
+
+.export-btn.all{
+  background:#2563eb;
+}
+
+.export-btn.open{
+  background:#f59e0b;
+}
+
+.export-btn.progress{
+  background:#3b82f6;
+}
+
+.export-btn.done{
+  background:#22c55e;
 }
