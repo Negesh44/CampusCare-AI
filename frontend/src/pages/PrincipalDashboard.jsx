@@ -240,26 +240,30 @@ const paginatedComplaints =
   const rows = [];
 
   rows.push([
-    "Title",
-    "Category",
-    "Faculty",
-    "Location",
-    "Priority",
-    "Status",
-    "Raised On"
-  ].join(","));
+  "Title",
+  "Description",
+  "Category",
+  "Faculty",
+  "Location",
+  "Priority",
+  "Status",
+  "Raised On",
+  "Resolved On"
+].join(","));
 
   data.forEach(c => {
 
     rows.push([
-      c.title,
-      c.category,
-      c.assignedFacultyName,
-      c.assignedLocation,
-      c.priority,
-      c.status,
-      c.createdAt
-    ].join(","));
+  c.title,
+  c.description,
+  c.category,
+  c.assignedFacultyName,
+  c.assignedLocation,
+  c.priority,
+  c.status,
+  c.createdAt,
+  c.resolvedAt || ""
+].join(","));
 
   });
 
@@ -470,12 +474,14 @@ const paginatedComplaints =
 <tr>
   <th>#</th>
   <th>Title</th>
+  <th>Description</th>
   <th>Category</th>
   <th>Faculty</th>
   <th>Location</th>
   <th>Priority</th>
   <th>Status</th>
   <th>Raised On</th>
+  <th>Resolved On</th>
 </tr>
 
             </thead>
@@ -487,7 +493,14 @@ const paginatedComplaints =
               <tr key={c.id}>
 <td>{(page - 1) * itemsPerPage + index + 1}</td>
   <td>{c.title}</td>
-
+<td
+  style={{
+    maxWidth: "250px",
+    whiteSpace: "normal",
+  }}
+>
+  {c.description}
+</td>
   <td>
   <span className="category-badge">
     {c.category}
@@ -538,6 +551,14 @@ const paginatedComplaints =
   })
       : "-"}
   </td>
+  <td>
+  {c.resolvedAt
+    ? new Date(c.resolvedAt).toLocaleString("en-IN", {
+        dateStyle: "medium",
+        timeStyle: "short",
+      })
+    : "-"}
+</td>
 
 </tr>
                   
