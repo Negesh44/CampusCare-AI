@@ -19,14 +19,14 @@ import Sidebar from "../components/Sidebar";
 function RaiseComplaint() {
   const navigate = useNavigate();
   const [complaint, setComplaint] = useState({
-    title: "",
-    category: "",
-    blockName: "",
-    floor: 0,
-    roomNumber: "",
-    priority: "",
-    description: "",
-  });
+  title: "",
+  category: "",
+  blockName: "",
+  floor: "",
+  roomNumber: "",
+  priority: "",
+  description: "",
+});
 
   const categories = [
   "Cleanliness",
@@ -60,6 +60,20 @@ const availableFloors =
   blockFloors[complaint.blockName] || [];
 
   const submitComplaint = async () => {
+   if (
+  !complaint.title.trim() ||
+  !complaint.category ||
+  !complaint.blockName ||
+  complaint.floor === "" ||
+  complaint.floor === null ||
+  complaint.floor === undefined ||
+  !complaint.roomNumber.trim() ||
+  !complaint.priority ||
+  !complaint.description.trim()
+) {
+  alert("Please fill in all the required fields.");
+  return;
+}
     try {
       const user = JSON.parse(
   localStorage.getItem("user")
@@ -84,14 +98,14 @@ const payload = {
 navigate("/my-complaints");
 
       setComplaint({
-        title: "",
-        category: "",
-        blockName: "",
-        floor: 0,
-        roomNumber: "",
-        priority: "",
-        description: "",
-      });
+  title: "",
+  category: "",
+  blockName: "",
+  floor: "",
+  roomNumber: "",
+  priority: "",
+  description: "",
+});
 
     } catch (error) {
       console.error(error);
@@ -159,6 +173,7 @@ navigate("/my-complaints");
             >
 
               <TextField
+               required
                 label="Request Title"
                 fullWidth
                 sx={{
@@ -178,6 +193,7 @@ navigate("/my-complaints");
               />
 
               <TextField
+               required
                 select
                 label="Category"
                 fullWidth
@@ -211,6 +227,7 @@ navigate("/my-complaints");
               </TextField>
 
               <TextField
+               required
                 select
                 label="Block"
                 fullWidth
@@ -227,7 +244,7 @@ navigate("/my-complaints");
   setComplaint({
     ...complaint,
     blockName: e.target.value,
-    floor: 0,
+    floor: "",
   })
 }
               >
@@ -244,6 +261,7 @@ navigate("/my-complaints");
               </TextField>
 
               <TextField
+               required
                 select
                 label="Floor"
                 fullWidth
@@ -274,6 +292,7 @@ navigate("/my-complaints");
               </TextField>
 
               <TextField
+               required
   label="Room Number"
   fullWidth
   sx={{
@@ -292,6 +311,7 @@ navigate("/my-complaints");
 />
 
               <TextField
+               required
                 select
                 label="Priority"
                 fullWidth
@@ -328,6 +348,7 @@ navigate("/my-complaints");
             </Box>
 
             <TextField
+             required
   label="Describe the Issue"
   multiline
   rows={6}
