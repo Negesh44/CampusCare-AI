@@ -34,7 +34,7 @@ function Topbar() {
         <div className="profile-wrapper">
 
           <div className="profile-circle">
-            NB
+            {user?.name?.charAt(0)}
           </div>
 
           <div className="profile-info">
@@ -44,7 +44,7 @@ function Topbar() {
             </h4>
 
             <p>
-              Student • CSE (AIML)
+              Studentq • CSE (AIML)
             </p>
 
           </div>

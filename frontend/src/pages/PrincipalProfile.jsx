@@ -100,7 +100,7 @@ function PrincipalProfile() {
 
             <div>
               <strong>Role:</strong>
-              {" "}Dr. Deiva Sundari
+              {" "}Principal
             </div>
 
             <div>
