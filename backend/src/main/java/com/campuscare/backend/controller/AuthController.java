@@ -28,6 +28,24 @@ public class AuthController {
         return "Auth Controller Working";
     }
 
+    @GetMapping("/db-status")
+    public Map<String, Object> dbStatus() {
+        Map<String, Object> status = new java.util.HashMap<>();
+        try {
+            long userCount = userRepository.count();
+            status.put("database", "CONNECTED");
+            status.put("users_count", userCount);
+        } catch (Exception e) {
+            status.put("database", "ERROR");
+            status.put("error", e.getClass().getSimpleName());
+            status.put("message", e.getMessage());
+            if (e.getCause() != null) {
+                status.put("cause", e.getCause().getMessage());
+            }
+        }
+        return status;
+    }
+
     @PostMapping("/login")
     public ResponseEntity<?> login(
             @RequestBody Map<String, String> request) {
