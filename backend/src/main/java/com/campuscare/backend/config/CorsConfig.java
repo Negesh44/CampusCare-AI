@@ -16,9 +16,10 @@ public class CorsConfig {
 
         CorsConfiguration config = new CorsConfiguration();
 
-        config.setAllowedOrigins(List.of(
-            "http://localhost:5173",
-            "https://campuscare-frontend-gsfk.onrender.com"
+        config.setAllowedOriginPatterns(List.of(
+            "http://localhost:*",
+            "https://*.onrender.com",
+            "https://*.vercel.app"
         ));
 
         config.setAllowedMethods(List.of(
