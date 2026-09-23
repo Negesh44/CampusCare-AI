@@ -71,13 +71,14 @@ else if (user.role === "MANAGER") {
     const email = userInfo.email;
     const name = userInfo.name;
 
-    if (
-      !email.endsWith(
-        "@eec.srmrmp.edu.in"
-      )
-    ) {
+    const isCollegeEmail =
+      email.endsWith("@eec.srmrmp.edu.in") ||
+      email.endsWith("@srmrmp.edu.in");
+    const isDevEmail = email.toLowerCase() === "negeshbalam@gmail.com";
+
+    if (!isCollegeEmail && !isDevEmail) {
       alert(
-        "Only college email accounts are allowed"
+        "Only college email accounts (@eec.srmrmp.edu.in / @srmrmp.edu.in) are allowed"
       );
       return;
     }
@@ -112,11 +113,12 @@ else if (user.role === "MANAGER") {
 }
 
   } catch (error) {
-    console.error(error);
-
-    alert(
-      "Google Login Failed"
-    );
+    console.error("Google Login Error:", error);
+    const errorMessage =
+      error.response?.data?.message ||
+      error.message ||
+      "Server communication failed";
+    alert(`Google Login Failed: ${errorMessage}`);
   }
 };
 
@@ -208,9 +210,12 @@ else if (user.role === "MANAGER") {
 >
   <GoogleLogin
     onSuccess={googleLogin} 
-    onError={() =>
-      alert("Google Login Failed")
-    }
+    onError={(err) => {
+      console.error("Google OAuth Error:", err);
+      alert(
+        "Google Sign-In Failed: Unable to complete authentication.\n\nPlease ensure 'https://campuscare-frontend-gsfk.onrender.com' is added to Authorized JavaScript Origins in Google Cloud Console."
+      );
+    }}
   />
 </div>
 

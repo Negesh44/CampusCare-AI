@@ -2,6 +2,8 @@ package com.campuscare.backend.controller;
 
 import java.util.Map;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,7 +15,6 @@ import com.campuscare.backend.repository.UserRepository;
 
 @RestController
 @RequestMapping("/api/auth")
-
 public class AuthController {
 
     private final UserRepository userRepository;
@@ -28,7 +29,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public User login(
+    public ResponseEntity<?> login(
             @RequestBody Map<String, String> request) {
 
         String email = request.get("email");
@@ -36,66 +37,78 @@ public class AuthController {
 
         User user = userRepository
                 .findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElse(null);
 
-        if (!user.getPassword().equals(password)) {
-            throw new RuntimeException("Invalid Password");
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(Map.of("message", "User not found"));
         }
 
-        return user;
+        if (!user.getPassword().equals(password)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(Map.of("message", "Invalid Password"));
+        }
+
+        return ResponseEntity.ok(user);
     }
 
     @PostMapping("/google-login")
-    public User googleLogin(
+    public ResponseEntity<?> googleLogin(
             @RequestBody Map<String, String> request) {
 
         String email = request.get("email");
         String name = request.get("name");
 
-        if (!email.endsWith("@eec.srmrmp.edu.in")) {
-            throw new RuntimeException(
-                    "Only college email accounts are allowed");
+        if (email == null) {
+            return ResponseEntity.badRequest()
+                    .body(Map.of("message", "Email is required"));
+        }
+
+        boolean isCollegeEmail = email.endsWith("@eec.srmrmp.edu.in") || email.endsWith("@srmrmp.edu.in");
+        boolean isDevEmail = email.equalsIgnoreCase("negeshbalam@gmail.com");
+
+        if (!isCollegeEmail && !isDevEmail) {
+            return ResponseEntity.badRequest()
+                    .body(Map.of("message", "Only college email accounts are allowed"));
         }
 
         User user = userRepository
                 .findByEmail(email)
                 .orElse(null);
 
-        // Faculty / Principal already exists
+        // User already exists
         if (user != null) {
-            return user;
+            return ResponseEntity.ok(user);
         }
-        if (email.equalsIgnoreCase(
-                "asst.manager.maintenance@srmrmp.edu.in")) {
 
-            user = userRepository
-                    .findByEmail(email)
-                    .orElse(null);
+        if (email.equalsIgnoreCase("asst.manager.maintenance@srmrmp.edu.in")) {
+            user = new User();
+            user.setName("Muthukumar");
+            user.setEmail(email);
+            user.setRole("MANAGER");
+            user.setDepartment("Maintenance");
+            user.setPassword("GOOGLE_LOGIN");
+            return ResponseEntity.ok(userRepository.save(user));
+        }
 
-            if (user == null) {
-
-                user = new User();
-
-                user.setName("Muthukumar");
-                user.setEmail(email);
-                user.setRole("MANAGER");
-                user.setDepartment("Maintenance");
-
-                userRepository.save(user);
-            }
-
-            return user;
+        if (email.equalsIgnoreCase("negeshbalam@gmail.com")) {
+            user = new User();
+            user.setName(name != null ? name : "Negesh Bala");
+            user.setEmail(email);
+            user.setRole("STUDENT");
+            user.setDepartment("CSE");
+            user.setPassword("GOOGLE_LOGIN");
+            return ResponseEntity.ok(userRepository.save(user));
         }
 
         // New Student
         user = new User();
-
         user.setName(name);
         user.setEmail(email);
         user.setRole("STUDENT");
         user.setDepartment("ECE");
         user.setPassword("GOOGLE_LOGIN");
 
-        return userRepository.save(user);
+        return ResponseEntity.ok(userRepository.save(user));
     }
 }
